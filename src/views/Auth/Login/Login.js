@@ -10,7 +10,7 @@ import { apiBaseUrl } from '@/dataProvider';
 import setAuthTokens from '@/utils/setAuthTokens';
 import useRouter from '@/utils/useRouter';
 import Cookies from 'js-cookie';
-import { useUser } from '@/userContext';
+import { useUser } from '@/context/userContext';
 import { LoginForm } from './components';
 
 const useStyles = makeStyles((theme) => ({

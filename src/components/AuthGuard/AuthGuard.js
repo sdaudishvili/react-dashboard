@@ -5,8 +5,8 @@ import Cookies from 'js-cookie';
 import { enableInterceptors } from '@/utils/axios';
 import useRouter from '@/utils/useRouter';
 import removeAuthTokens from '@/utils/removeAuthTokens';
-import { useUser } from '@/userContext';
 import parseJwt from '@/utils/parseJWT';
+import { useUser } from '@/context/userContext';
 
 const getToken = () => Cookies.get('token');
 

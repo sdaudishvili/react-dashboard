@@ -37,8 +37,6 @@ const interceptors =
         return response;
       },
       (error) => {
-        console.log('error');
-
         if (isUnauthorized(error)) {
           handleUnauthorized();
           return Promise.reject(error);

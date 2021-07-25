@@ -7,7 +7,7 @@ import { Divider, Paper, Avatar, Typography } from '@material-ui/core';
 import getInitials from '@/utils/getInitials';
 import useRouter from '@/utils/useRouter';
 import { Navigation } from '@/components';
-import { useUser } from '@/userContext';
+import { useUser } from '@/context/userContext';
 import navigationConfig from './navigationConfig';
 
 const useStyles = makeStyles((theme) => ({

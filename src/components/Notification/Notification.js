@@ -1,11 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useSnackbar } from 'notistack';
+import { useNotification } from '@/context/notificationContext';
 
 let displayed = [];
 
 const Notification = (props) => {
-  const { onClose, notifications } = props;
+  // eslint-disable-next-line no-unused-vars
+  const { onClose, notifications: a } = props;
+  const { notifications } = useNotification();
 
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 

@@ -14,6 +14,19 @@ export const getMany = async (resource, params = {}) => {
   }
 };
 
+export const createResource = async (resource, values) => {
+  try {
+    const res = await axios.post(`${apiBaseUrl}/${resource}`, values);
+    return res.data;
+  } catch (error) {
+    if (error.response && error.response.data) {
+      throw error.response.data;
+    } else {
+      throw error;
+    }
+  }
+};
+
 export const deleteResource = async (resource, id) => {
   await axios.delete(`${apiBaseUrl}/${resource}/${id}`);
 };

@@ -8,7 +8,7 @@ import InputIcon from '@material-ui/icons/Input';
 
 import useRouter from '@/utils/useRouter';
 import removeAuthTokens from '@/utils/removeAuthTokens';
-import { useUser } from '@/userContext';
+import { useUser } from '@/context/userContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {
