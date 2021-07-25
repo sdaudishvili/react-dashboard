@@ -5,10 +5,11 @@ import LockIcon from '@material-ui/icons/Lock';
 
 import { Page } from '@/components';
 import gradients from '@/utils/gradients';
-// import useRouter from '@/utils/useRouter';
-// import setAuthTokens from '@/utils/setAuthTokens';
-// import { useDispatch } from 'react-redux';
-// import { login as userLogin } from '@actions/account.action';
+import { axiosRemote as axios } from '@/utils/axios';
+import { apiBaseUrl } from '@/dataProvider';
+import setAuthTokens from '@/utils/setAuthTokens';
+import useRouter from '@/utils/useRouter';
+import Cookies from 'js-cookie';
 import { LoginForm } from './components';
 
 const useStyles = makeStyles((theme) => ({
@@ -69,24 +70,28 @@ const useStyles = makeStyles((theme) => ({
 const Login = () => {
   const classes = useStyles();
 
-  // const router = useRouter();
+  const router = useRouter();
   // const dispatch = useDispatch();
 
+  React.useEffect(() => {
+    if (Cookies.get('token')) {
+      router.history.push('/');
+    }
+  }, []);
+
   const login = async (values) => {
-    console.log(values);
-    // try {
-    //   const result = await dispatch(userLogin(values));
-    //   const { data: loginInfo } = result;
-
-    //   if (loginInfo && loginInfo.token && loginInfo.refreshToken) {
-    //     const { token, refreshToken } = loginInfo;
-    //     setAuthTokens(token, refreshToken);
-
-    //     router.history.push('/');
-    //   }
-    // } catch (err) {
-    //   console.log(err);
-    // }
+    try {
+      const { data } = await axios.post(`${apiBaseUrl}/auth/login`, values);
+      const { signInResult, token: tokenResponse } = data;
+      if (signInResult.succeeded) {
+        const { token, refershToken } = tokenResponse;
+        setAuthTokens(token, refershToken);
+        router.history.push('/');
+      }
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (

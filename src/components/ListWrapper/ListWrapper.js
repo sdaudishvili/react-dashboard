@@ -55,8 +55,8 @@ const ListWrapper = (props) => {
               <TablePagination
                 component="div"
                 count={count}
-                onChangePage={handleChangePage}
-                onChangeRowsPerPage={handleChangeRowsPerPage}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
                 page={page}
                 rowsPerPage={perPage}
                 rowsPerPageOptions={[5, 10, 25]}
