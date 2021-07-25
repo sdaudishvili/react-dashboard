@@ -7,6 +7,7 @@ import { Divider, Paper, Avatar, Typography } from '@material-ui/core';
 import getInitials from '@/utils/getInitials';
 import useRouter from '@/utils/useRouter';
 import { Navigation } from '@/components';
+import { useUser } from '@/userContext';
 import navigationConfig from './navigationConfig';
 
 const useStyles = makeStyles((theme) => ({
@@ -38,12 +39,12 @@ const useStyles = makeStyles((theme) => ({
 const NavBar = (props) => {
   const { openMobile, onMobileClose, className, ...rest } = props;
 
-  const userInfo = {};
+  const { user: userInfo } = useUser();
 
   const classes = useStyles();
   const router = useRouter();
 
-  const fullName = `${userInfo.first_name} ${userInfo.last_name}`;
+  const fullName = `${userInfo.given_name}`;
 
   useEffect(() => {
     if (openMobile) {

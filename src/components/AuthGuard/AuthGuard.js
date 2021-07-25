@@ -5,11 +5,14 @@ import Cookies from 'js-cookie';
 import { enableInterceptors } from '@/utils/axios';
 import useRouter from '@/utils/useRouter';
 import removeAuthTokens from '@/utils/removeAuthTokens';
+import { useUser } from '@/userContext';
+import parseJwt from '@/utils/parseJWT';
 
 const getToken = () => Cookies.get('token');
 
 const AuthGuard = (props) => {
   const { children } = props;
+  const { setUser } = useUser();
 
   const [isLoaded, setIsLoaded] = React.useState(false);
 
@@ -27,6 +30,7 @@ const AuthGuard = (props) => {
     const token = getToken();
 
     if (token) {
+      setUser(parseJwt(token));
       enableInterceptors({
         handleUnauthorized: handleUnauthorizedRequest
       });

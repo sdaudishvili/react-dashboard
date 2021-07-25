@@ -7,9 +7,8 @@ import { AppBar, Button, Toolbar } from '@material-ui/core';
 import InputIcon from '@material-ui/icons/Input';
 
 import useRouter from '@/utils/useRouter';
-// import { useDispatch } from 'react-redux';
-// import { removeSessionUser } from '@store/actions/account.action';
 import removeAuthTokens from '@/utils/removeAuthTokens';
+import { useUser } from '@/userContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
 
 const TopBar = (props) => {
   const { onOpenNavBarMobile, className, ...rest } = props;
+  const { setUser } = useUser();
 
   const classes = useStyles();
   const { history } = useRouter();
@@ -39,7 +39,7 @@ const TopBar = (props) => {
   const handleLogout = () => {
     history.push('/auth/login');
     removeAuthTokens();
-    // dispatch(removeSessionUser());
+    setUser({});
   };
 
   return (

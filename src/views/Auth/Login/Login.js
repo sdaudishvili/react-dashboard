@@ -10,6 +10,7 @@ import { apiBaseUrl } from '@/dataProvider';
 import setAuthTokens from '@/utils/setAuthTokens';
 import useRouter from '@/utils/useRouter';
 import Cookies from 'js-cookie';
+import { useUser } from '@/userContext';
 import { LoginForm } from './components';
 
 const useStyles = makeStyles((theme) => ({
@@ -69,6 +70,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Login = () => {
   const classes = useStyles();
+  const { setUser } = useUser();
 
   const router = useRouter();
   // const dispatch = useDispatch();
@@ -85,6 +87,7 @@ const Login = () => {
       const { signInResult, token: tokenResponse } = data;
       if (signInResult.succeeded) {
         const { token, refershToken } = tokenResponse;
+        setUser(token);
         setAuthTokens(token, refershToken);
         router.history.push('/');
       }

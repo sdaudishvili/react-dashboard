@@ -10,6 +10,7 @@ import { ScrollReset, AuthGuard, Notification, BaseRoutesProvider } from './comp
 import './assets/scss/index.scss';
 // import { ResourcesProvider } from './components/Base';
 import { ResourcesProvider } from './components/Base';
+import { UserProvider } from './userContext';
 // import { ResourcesProvider } from './components/Base';
 // import routes from './routes';
 
@@ -23,13 +24,15 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <SnackbarProvider>
-        <Router history={history}>
-          <ScrollReset />
-          <AuthGuard>
-            <BaseRoutesProvider />
-            <ResourcesProvider />
-          </AuthGuard>
-        </Router>
+        <UserProvider>
+          <Router history={history}>
+            <ScrollReset />
+            <AuthGuard>
+              <BaseRoutesProvider />
+              <ResourcesProvider />
+            </AuthGuard>
+          </Router>
+        </UserProvider>
         <Notification onClose={handleNotificationClose} notifications={[]} />
       </SnackbarProvider>
     </ThemeProvider>
