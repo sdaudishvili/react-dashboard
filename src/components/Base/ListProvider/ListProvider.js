@@ -1,6 +1,6 @@
 import Page from '@/components/Page';
 import PageHead from '@/components/PageHead';
-import { getMany } from '@/dataProvider';
+import { deleteResource, getMany } from '@/dataProvider';
 import { Button } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import { Link as RouterLink } from 'react-router-dom';
@@ -9,18 +9,19 @@ import { firstLetterToUpperCase } from '@/utils/base';
 
 const defaultQuery = {
   q: '',
-  take: 5,
-  skip: 0
+  page: 0,
+  perPage: 5
 };
 
 const ListProvider = (props) => {
-  const { resourceName, component: Component, createRoute } = props;
+  const { resourceName, component: Component, createRoute, editRoute } = props;
 
-  const [query] = React.useState({ ...defaultQuery });
+  const [options, setOptions] = React.useState({ ...defaultQuery });
   const [resource, setResource] = React.useState({ data: [], meta: 0 });
 
   React.useEffect(() => {
     const fetchData = async () => {
+      const query = { take: options.perPage, skip: options.page * options.perPage, q: options.q };
       try {
         const { data = [], meta: { total = 0 } = {} } = await getMany(resourceName, { query });
         setResource({ data, total });
@@ -29,9 +30,14 @@ const ListProvider = (props) => {
       }
     };
     fetchData();
+  }, [options]);
+
+  const deleteHandler = React.useCallback(async (id) => {
+    await deleteResource(resourceName, id);
+    setResource(({ data, total }) => ({ data: data.filter((x) => x.id !== id), total: total - 1 }));
   }, []);
 
-  const transformedResourceName = firstLetterToUpperCase(resourceName);
+  const transformedResourceName = React.useMemo(() => firstLetterToUpperCase(resourceName), [resourceName]);
 
   return (
     <Page title={transformedResourceName}>
@@ -42,7 +48,13 @@ const ListProvider = (props) => {
           </Button>
         )}
       </PageHead>
-      <Component {...resource} />
+      <Component
+        {...resource}
+        editRoute={editRoute}
+        setOptions={setOptions}
+        options={options}
+        onDeleteClick={deleteHandler}
+      />
     </Page>
   );
 };
@@ -50,12 +62,14 @@ const ListProvider = (props) => {
 ListProvider.propTypes = {
   resourceName: PropTypes.string.isRequired,
   createRoute: PropTypes.string,
+  editRoute: PropTypes.string,
   component: PropTypes.any
 };
 
 ListProvider.defaultProps = {
   component: null,
-  createRoute: null
+  createRoute: null,
+  editRoute: null
 };
 
 export default ListProvider;

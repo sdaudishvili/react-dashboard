@@ -5,7 +5,6 @@ const baseUrl = 'https://localhost:44355/api';
 
 // eslint-disable-next-line consistent-return
 export const getMany = async (resource, params = {}) => {
-  console.log(resource);
   const { query = {} } = params;
   try {
     const res = await axios.get(`${baseUrl}/${resource}${buildQuery(query)}`);
@@ -13,4 +12,8 @@ export const getMany = async (resource, params = {}) => {
   } catch (error) {
     console.log(error);
   }
+};
+
+export const deleteResource = async (resource, id) => {
+  await axios.delete(`${baseUrl}/${resource}/${id}`);
 };

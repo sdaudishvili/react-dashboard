@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Divider, Card, CardActions, TablePagination, CardHeader, Typography, Box } from '@material-ui/core';
 import clsx from 'clsx';
@@ -18,26 +18,16 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const ListWrapper = React.forwardRef((props, ref) => {
-  const { count, page, className, children, title, onPageChange, initialRowsPerPage, pagination, action, ...rest } =
-    props;
+const ListWrapper = (props) => {
+  const { count, page, className, children, title, onPageChange, perPage, pagination, action, ...rest } = props;
   const classes = useStyles();
 
-  const [rowsPerPage, setRowsPerPage] = useState(initialRowsPerPage);
-
-  React.useImperativeHandle(ref, () => ({
-    resetPagination: () => {
-      onPageChange(0, rowsPerPage);
-    }
-  }));
-
   const handleChangePage = (event, newPage) => {
-    onPageChange(newPage, rowsPerPage);
+    onPageChange(newPage, perPage);
   };
 
   const handleChangeRowsPerPage = (event) => {
     const newValue = event.target.value;
-    setRowsPerPage(newValue);
     onPageChange(0, newValue);
   };
 
@@ -48,7 +38,7 @@ const ListWrapper = React.forwardRef((props, ref) => {
           {count} Records found.
           {pagination && (
             <>
-              Page {page + 1} of {Math.ceil(count / rowsPerPage)}
+              Page {page + 1} of {Math.ceil(count / perPage)}
             </>
           )}
         </Typography>
@@ -68,7 +58,7 @@ const ListWrapper = React.forwardRef((props, ref) => {
                 onChangePage={handleChangePage}
                 onChangeRowsPerPage={handleChangeRowsPerPage}
                 page={page}
-                rowsPerPage={rowsPerPage}
+                rowsPerPage={perPage}
                 rowsPerPageOptions={[5, 10, 25]}
               />
             </CardActions>
@@ -77,7 +67,7 @@ const ListWrapper = React.forwardRef((props, ref) => {
       </Card>
     </Box>
   );
-});
+};
 
 ListWrapper.propTypes = {
   className: PropTypes.string,
@@ -85,7 +75,7 @@ ListWrapper.propTypes = {
   count: PropTypes.number,
   title: PropTypes.string,
   onPageChange: PropTypes.func,
-  initialRowsPerPage: PropTypes.number,
+  perPage: PropTypes.number,
   pagination: PropTypes.bool,
   action: PropTypes.any,
   page: PropTypes.number
@@ -98,7 +88,7 @@ ListWrapper.defaultProps = {
   count: 0,
   page: 0,
   onPageChange: () => {},
-  initialRowsPerPage: 10,
+  perPage: 10,
   pagination: true,
   action: null
 };

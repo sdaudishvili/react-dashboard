@@ -97,10 +97,7 @@ const ListRenderer = (props) => {
                     x.imageKey ? (
                       <TableCell key={x.prop}>
                         <div className={classes.nameCell}>
-                          <Avatar
-                            className={classes.avatar}
-                            src={process.env.STATIC_RESOURCES_URL.concat('/', getValueByPath(item, x.imageKey))}
-                          >
+                          <Avatar className={classes.avatar} src={getValueByPath(item, x.imageKey)}>
                             {' '}
                           </Avatar>
                           {x.isHtml ? (
