@@ -15,6 +15,7 @@ const Resource = (props) => {
     <Switch>
       {create && (
         <Route
+          exact
           path={createRoute}
           render={() => (
             <Dashboard>
@@ -23,9 +24,10 @@ const Resource = (props) => {
           )}
         />
       )}
-      {edit && <Route path={editRoute} render={() => <EditComponent />} />}
+      {edit && <Route exact path={editRoute} render={() => <EditComponent />} />}
       {list && (
         <Route
+          exact
           path={baseRoute}
           render={() => (
             <Dashboard>

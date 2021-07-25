@@ -21,8 +21,12 @@ const ListProvider = (props) => {
 
   React.useEffect(() => {
     const fetchData = async () => {
-      const { data = [], meta: { total = 0 } = {} } = await getMany(resourceName, { query });
-      setResource({ data, total });
+      try {
+        const { data = [], meta: { total = 0 } = {} } = await getMany(resourceName, { query });
+        setResource({ data, total });
+      } catch (error) {
+        console.log(error);
+      }
     };
     fetchData();
   }, []);

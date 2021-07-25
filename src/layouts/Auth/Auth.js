@@ -1,8 +1,5 @@
-import React, { Suspense } from 'react';
-import { renderRoutes } from 'react-router-config';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
-import { LinearProgress } from '@material-ui/core';
 
 // import { useDispatch, useSelector } from 'react-redux';
 // import { removeNotification } from '@actions/base.action';
@@ -19,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Auth = (props) => {
-  const { route } = props;
+  const { children } = props;
 
   const classes = useStyles();
   // const dispatch = useDispatch();
@@ -27,15 +24,13 @@ const Auth = (props) => {
   return (
     <>
       <Topbar />
-      <main className={classes.content}>
-        <Suspense fallback={<LinearProgress />}>{renderRoutes(route.routes)}</Suspense>
-      </main>
+      <main className={classes.content}>{children}</main>
     </>
   );
 };
 
 Auth.propTypes = {
-  route: PropTypes.object.isRequired
+  children: PropTypes.object.isRequired
 };
 
 export default Auth;

@@ -17,5 +17,6 @@ export { default as Notification } from './Notification';
 export { default as AuthGuard } from './AuthGuard';
 export { default as ListRenderer } from './ListRenderer';
 export { default as Dropzone } from './Dropzone';
+export { default as BaseRoutesProvider } from './BaseRoutesProvider';
 
 export * from './CardComponents';

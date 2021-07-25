@@ -6,10 +6,11 @@ import { SnackbarProvider } from 'notistack';
 
 // import { renderRoutes } from 'react-router-config';
 import theme from './theme';
-import { ScrollReset, AuthGuard, Notification } from './components';
+import { ScrollReset, AuthGuard, Notification, BaseRoutesProvider } from './components';
 import './assets/scss/index.scss';
-import { Resource } from './components/Base';
-import { PageCreate, PagesList } from './views/Pages';
+// import { ResourcesProvider } from './components/Base';
+import { ResourcesProvider } from './components/Base';
+// import { ResourcesProvider } from './components/Base';
 // import routes from './routes';
 
 const history = createBrowserHistory();
@@ -25,8 +26,8 @@ const App = () => {
         <Router history={history}>
           <ScrollReset />
           <AuthGuard>
-            {/* {renderRoutes(routes)} */}
-            <Resource name="pages" list={PagesList} create={PageCreate} />
+            <BaseRoutesProvider />
+            <ResourcesProvider />
           </AuthGuard>
         </Router>
         <Notification onClose={handleNotificationClose} notifications={[]} />
