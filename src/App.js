@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
+import { ThemeProvider } from '@material-ui/styles';
+import { SnackbarProvider } from 'notistack';
 
-function App() {
+// import { renderRoutes } from 'react-router-config';
+import theme from './theme';
+import { ScrollReset, AuthGuard, Notification } from './components';
+import './assets/scss/index.scss';
+import { Resource } from './components/Base';
+import Pages from './views/Pages';
+// import routes from './routes';
+
+const history = createBrowserHistory();
+
+const App = () => {
+  const handleNotificationClose = () => {
+    // dispatch(removeNotification(key));
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <SnackbarProvider>
+        <Router history={history}>
+          <ScrollReset />
+          <AuthGuard>
+            {/* {renderRoutes(routes)} */}
+            <Resource name="pages" list={Pages} />
+          </AuthGuard>
+        </Router>
+        <Notification onClose={handleNotificationClose} notifications={[]} />
+      </SnackbarProvider>
+    </ThemeProvider>
   );
-}
+};
 
 export default App;
