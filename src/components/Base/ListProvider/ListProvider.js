@@ -6,6 +6,8 @@ import PropTypes from 'prop-types';
 import { Link as RouterLink } from 'react-router-dom';
 import React from 'react';
 import { firstLetterToUpperCase } from '@/utils/base';
+import { useSnackbar } from 'notistack';
+import { messages } from '@/utils/messages';
 
 const defaultQuery = {
   q: '',
@@ -15,6 +17,7 @@ const defaultQuery = {
 
 const ListProvider = (props) => {
   const { resourceName, component: Component, createRoute, editRoute } = props;
+  const { enqueueSnackbar } = useSnackbar();
 
   const [options, setOptions] = React.useState({ ...defaultQuery });
   const [resource, setResource] = React.useState({ data: [], meta: 0 });
@@ -33,8 +36,14 @@ const ListProvider = (props) => {
   }, [options]);
 
   const deleteHandler = React.useCallback(async (id) => {
-    await deleteResource(resourceName, id);
-    setResource(({ data, total }) => ({ data: data.filter((x) => x.id !== id), total: total - 1 }));
+    try {
+      await deleteResource(resourceName, id);
+      setResource(({ data, total }) => ({ data: data.filter((x) => x.id !== id), total: total - 1 }));
+      enqueueSnackbar(messages.DeleteSuccess, { variant: 'success' });
+    } catch (error) {
+      enqueueSnackbar(error.ToString(), { variant: 'error' });
+      console.log(error);
+    }
   }, []);
 
   const transformedResourceName = React.useMemo(() => firstLetterToUpperCase(resourceName), [resourceName]);
