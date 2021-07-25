@@ -1,24 +1,32 @@
 import Dashboard from '@/layouts/Dashboard';
 import PropTypes from 'prop-types';
 import { Route, Switch } from 'react-router-dom';
-import { ListProvider } from '..';
+import { ListProvider, CreateProvider } from '..';
 
 const Resource = (props) => {
   const { name, list, create, edit } = props;
-  const CreateComponent = create;
   const EditComponent = edit;
 
-  const basePath = `/${name}`;
-  const createRoute = `${basePath}/create`;
-  const editRoute = `${basePath}/:id`;
+  const baseRoute = `/${name}`;
+  const createRoute = `${baseRoute}/create`;
+  const editRoute = `${baseRoute}/:id`;
 
   return (
     <Switch>
-      {create && <Route path={createRoute} render={() => <CreateComponent />} />}
+      {create && (
+        <Route
+          path={createRoute}
+          render={() => (
+            <Dashboard>
+              <CreateProvider resourceName={name} component={create} baseRoute={baseRoute} />
+            </Dashboard>
+          )}
+        />
+      )}
       {edit && <Route path={editRoute} render={() => <EditComponent />} />}
       {list && (
         <Route
-          path={basePath}
+          path={baseRoute}
           render={() => (
             <Dashboard>
               <ListProvider resourceName={name} component={list} createRoute={create && createRoute} />

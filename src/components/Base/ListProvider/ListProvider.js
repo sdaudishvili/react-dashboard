@@ -31,7 +31,7 @@ const ListProvider = (props) => {
 
   return (
     <Page title={transformedResourceName}>
-      <PageHead h2={transformedResourceName} h1={`Browse ${transformedResourceName}`}>
+      <PageHead h2={transformedResourceName} h1="Browse">
         {createRoute && (
           <Button component={RouterLink} to={createRoute} color="primary" variant="contained">
             Create

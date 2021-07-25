@@ -9,7 +9,7 @@ import theme from './theme';
 import { ScrollReset, AuthGuard, Notification } from './components';
 import './assets/scss/index.scss';
 import { Resource } from './components/Base';
-import Pages from './views/Pages';
+import { PageCreate, PagesList } from './views/Pages';
 // import routes from './routes';
 
 const history = createBrowserHistory();
@@ -26,7 +26,7 @@ const App = () => {
           <ScrollReset />
           <AuthGuard>
             {/* {renderRoutes(routes)} */}
-            <Resource name="pages" list={Pages} />
+            <Resource name="pages" list={PagesList} create={PageCreate} />
           </AuthGuard>
         </Router>
         <Notification onClose={handleNotificationClose} notifications={[]} />

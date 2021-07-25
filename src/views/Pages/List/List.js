@@ -2,7 +2,7 @@ import React from 'react';
 import { Box } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
-const Pages = ({ data, total }) => {
+const PagesList = ({ data, total }) => {
   return (
     <Box mt={3}>
       {JSON.stringify(data)}
@@ -11,14 +11,14 @@ const Pages = ({ data, total }) => {
   );
 };
 
-Pages.propTypes = {
+PagesList.propTypes = {
   data: PropTypes.array,
   total: PropTypes.number
 };
 
-Pages.defaultProps = {
+PagesList.defaultProps = {
   data: [],
   total: 0
 };
 
-export default Pages;
+export default PagesList;
