@@ -4,8 +4,8 @@ import { Button, Card, CardContent, CardHeader, TextField } from '@material-ui/c
 import { ElemsRenderer, Preferences } from '@/components';
 import PropTypes from 'prop-types';
 
-const PageCreate = ({ saveHandler }) => {
-  const [values, setValues] = useState({});
+const PageCreate = ({ saveHandler, initialValues }) => {
+  const [values, setValues] = useState({ ...initialValues });
 
   const onSave = () => {
     saveHandler(values);
@@ -58,11 +58,13 @@ const PageCreate = ({ saveHandler }) => {
 };
 
 PageCreate.propTypes = {
-  saveHandler: PropTypes.func
+  saveHandler: PropTypes.func,
+  initialValues: PropTypes.object
 };
 
 PageCreate.defaultProps = {
-  saveHandler: () => {}
+  saveHandler: () => {},
+  initialValues: {}
 };
 
 export default PageCreate;

@@ -1,6 +1,6 @@
 import Page from '@/components/Page';
 import PageHead from '@/components/PageHead';
-import { deleteResource, getMany } from '@/dataProvider';
+import { deleteOne, getMany } from '@/dataProvider';
 import { Button } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import { Link as RouterLink } from 'react-router-dom';
@@ -37,7 +37,7 @@ const ListProvider = (props) => {
 
   const deleteHandler = React.useCallback(async (id) => {
     try {
-      await deleteResource(resourceName, id);
+      await deleteOne(resourceName, id);
       setResource(({ data, total }) => ({ data: data.filter((x) => x.id !== id), total: total - 1 }));
       enqueueSnackbar(messages.DeleteSuccess, { variant: 'success' });
     } catch (error) {

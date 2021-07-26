@@ -14,9 +14,9 @@ export const getMany = async (resource, params = {}) => {
   }
 };
 
-export const createResource = async (resource, values) => {
+export const getOne = async (resource, id) => {
   try {
-    const res = await axios.post(`${apiBaseUrl}/${resource}`, values);
+    const res = await axios.get(`${apiBaseUrl}/${resource}/${id}`);
     return res.data;
   } catch (error) {
     if (error.response && error.response.data) {
@@ -27,6 +27,42 @@ export const createResource = async (resource, values) => {
   }
 };
 
-export const deleteResource = async (resource, id) => {
+export const create = async (resource, values) => {
+  try {
+    await axios.post(`${apiBaseUrl}/${resource}`, values);
+  } catch (error) {
+    if (error.response && error.response.data) {
+      throw error.response.data;
+    } else {
+      throw error;
+    }
+  }
+};
+
+export const updateOne = async (resource, values) => {
+  try {
+    await axios.put(`${apiBaseUrl}/${resource}/${values.id}`, values);
+  } catch (error) {
+    if (error.response && error.response.data) {
+      throw error.response.data;
+    } else {
+      throw error;
+    }
+  }
+};
+
+export const update = async (resource, values) => {
+  try {
+    await axios.put(`${apiBaseUrl}/${resource}`, values);
+  } catch (error) {
+    if (error.response && error.response.data) {
+      throw error.response.data;
+    } else {
+      throw error;
+    }
+  }
+};
+
+export const deleteOne = async (resource, id) => {
   await axios.delete(`${apiBaseUrl}/${resource}/${id}`);
 };

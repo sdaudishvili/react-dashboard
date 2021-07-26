@@ -1,11 +1,10 @@
 import Dashboard from '@/layouts/Dashboard';
 import PropTypes from 'prop-types';
 import { Route, Switch } from 'react-router-dom';
-import { ListProvider, CreateProvider } from '..';
+import { ListProvider, CreateProvider, EditProvider } from '..';
 
 const Resource = (props) => {
   const { name, list, create, edit } = props;
-  const EditComponent = edit;
 
   const baseRoute = `/${name}`;
   const createRoute = `${baseRoute}/create`;
@@ -24,14 +23,29 @@ const Resource = (props) => {
           )}
         />
       )}
-      {edit && <Route exact path={editRoute} render={() => <EditComponent />} />}
+      {edit && (
+        <Route
+          exact
+          path={editRoute}
+          render={() => (
+            <Dashboard>
+              <EditProvider resourceName={name} component={edit} baseRoute={baseRoute} />
+            </Dashboard>
+          )}
+        />
+      )}
       {list && (
         <Route
           exact
           path={baseRoute}
           render={() => (
             <Dashboard>
-              <ListProvider resourceName={name} component={list} createRoute={create && createRoute} />
+              <ListProvider
+                resourceName={name}
+                component={list}
+                createRoute={create && createRoute}
+                editRoute={edit && baseRoute}
+              />
             </Dashboard>
           )}
         />
