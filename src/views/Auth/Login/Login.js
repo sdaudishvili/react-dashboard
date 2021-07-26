@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Card, CardContent, CardMedia, Typography, Divider } from '@material-ui/core';
@@ -43,10 +44,11 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.white,
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'flex-end',
     [theme.breakpoints.down('md')]: {
       display: 'none'
-    }
+    },
+    backgroundColor: 'black',
+    backgroundSize: '50%'
   },
   icon: {
     backgroundImage: gradients.green,
@@ -109,7 +111,7 @@ const Login = () => {
           <LoginForm className={classes.loginForm} login={login} />
           <Divider className={classes.divider} />
         </CardContent>
-        <CardMedia className={classes.media} image="/images/auth.png" title="Cover" />
+        <CardMedia className={classes.media} image="/images/leavingstone.svg" title="Cover" />
       </Card>
     </Page>
   );

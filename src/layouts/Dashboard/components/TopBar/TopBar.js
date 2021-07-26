@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: 'none'
   },
   logo: {
-    maxHeight: 40
+    maxHeight: 64
   },
   flexGrow: {
     flexGrow: 1
@@ -46,7 +46,7 @@ const TopBar = (props) => {
     <AppBar {...rest} className={clsx(classes.root, className)} color="primary">
       <Toolbar>
         <RouterLink to="/">
-          <img className={classes.logo} alt="Logo" src="/images/logos/logo.png" />
+          <img className={classes.logo} alt="Logo" src="/images/logo.png" />
         </RouterLink>
         <div className={classes.flexGrow} />
         <Button className={classes.logoutButton} color="inherit" onClick={handleLogout}>

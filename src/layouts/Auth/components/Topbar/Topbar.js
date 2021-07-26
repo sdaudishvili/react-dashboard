@@ -10,7 +10,7 @@ const useStyles = makeStyles(() => ({
     boxShadow: 'none'
   },
   logo: {
-    maxHeight: 40
+    maxHeight: 64
   }
 }));
 
@@ -23,7 +23,7 @@ const Topbar = (props) => {
     <AppBar {...rest} className={clsx(classes.root, className)} color="primary">
       <Toolbar>
         <RouterLink to="/auth/login">
-          <img className={classes.logo} alt="Logo" src="/images/logos/logo.png" />
+          <img className={classes.logo} alt="Logo" src="/images/logo.png" />
         </RouterLink>
       </Toolbar>
     </AppBar>
