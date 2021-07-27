@@ -3,10 +3,10 @@ import PageHead from '@/components/PageHead';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
-import { getStatic, updateStatic } from '@/dataProvider';
 import { useSnackbar } from 'notistack';
 import { messages } from '@/utils/messages';
 import { generateErrorMsg } from '@/utils/messages/generateErrorMsg';
+import { getStatic, updateStatic } from '@/api/dataProvider';
 
 const useStyles = makeStyles((theme) => ({
   root: {

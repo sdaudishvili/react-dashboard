@@ -1,12 +1,12 @@
 import Page from '@/components/Page';
 import PageHead from '@/components/PageHead';
-import { deleteOne, getMany } from '@/dataProvider';
 import { Button } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import { Link as RouterLink } from 'react-router-dom';
 import React from 'react';
 import { useSnackbar } from 'notistack';
 import { messages } from '@/utils/messages';
+import { deleteOne, getMany } from '@/api/dataProvider';
 
 const defaultQuery = {
   q: '',

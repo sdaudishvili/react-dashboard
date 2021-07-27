@@ -7,11 +7,11 @@ import LockIcon from '@material-ui/icons/Lock';
 import { Page } from '@/components';
 import gradients from '@/utils/gradients';
 import { axiosRemote as axios } from '@/utils/axios';
-import { apiBaseUrl } from '@/dataProvider';
 import setAuthTokens from '@/utils/setAuthTokens';
 import useRouter from '@/utils/useRouter';
 import Cookies from 'js-cookie';
 import { useUser } from '@/context/userContext';
+import { apiBaseUrl } from '@/api/dataProvider';
 import { LoginForm } from './components';
 
 const useStyles = makeStyles((theme) => ({

@@ -5,11 +5,11 @@ import PropTypes from 'prop-types';
 import { Link as RouterLink } from 'react-router-dom';
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
-import { create } from '@/dataProvider';
 import { useSnackbar } from 'notistack';
 import useRouter from '@/utils/useRouter';
 import { messages } from '@/utils/messages';
 import { generateErrorMsg } from '@/utils/messages/generateErrorMsg';
+import { create } from '@/api/dataProvider';
 
 const useStyles = makeStyles((theme) => ({
   root: {
