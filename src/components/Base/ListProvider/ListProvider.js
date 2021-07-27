@@ -7,6 +7,7 @@ import React from 'react';
 import { useSnackbar } from 'notistack';
 import { messages } from '@/utils/messages';
 import { deleteOne, getMany } from '@/api/dataProvider';
+import { generateErrorMsg } from '@/utils/messages/generateErrorMsg';
 
 const defaultQuery = {
   q: '',
@@ -27,8 +28,12 @@ const ListProvider = (props) => {
       try {
         const { data = [], meta: { total = 0 } = {} } = await getMany(resource, { query });
         setRecords({ data, total });
-      } catch (error) {
-        console.log(error);
+      } catch (err) {
+        if (err.errors) {
+          err.errors.forEach((err) => enqueueSnackbar(generateErrorMsg(err), { variant: 'error' }));
+        } else {
+          enqueueSnackbar(err.toString(), { variant: 'error' });
+        }
       }
     };
     fetchData();

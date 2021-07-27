@@ -18,6 +18,6 @@ export { default as AuthGuard } from './AuthGuard';
 export { default as ListRenderer } from './ListRenderer';
 export { default as Dropzone } from './Dropzone';
 export { default as BaseRoutesProvider } from './BaseRoutesProvider';
-export { default as ImageSelector } from './ImageSelector';
+export { default as Cropper } from './Cropper';
 
 export * from './CardComponents';
