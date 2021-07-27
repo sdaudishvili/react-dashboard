@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Card, CardContent, CardMedia, Typography, Divider } from '@material-ui/core';
@@ -11,7 +10,7 @@ import setAuthTokens from '@/utils/setAuthTokens';
 import useRouter from '@/utils/useRouter';
 import Cookies from 'js-cookie';
 import { useUser } from '@/context/userContext';
-import { apiBaseUrl } from '@/api/dataProvider';
+import { apiBaseUrl } from '@/api/host';
 import { LoginForm } from './components';
 
 const useStyles = makeStyles((theme) => ({
@@ -75,7 +74,6 @@ const Login = () => {
   const { setUser } = useUser();
 
   const router = useRouter();
-  // const dispatch = useDispatch();
 
   React.useEffect(() => {
     if (Cookies.get('token')) {
@@ -93,7 +91,6 @@ const Login = () => {
         setAuthTokens(token, refershToken);
         router.history.push('/');
       }
-      console.log(data);
     } catch (err) {
       console.log(err);
     }

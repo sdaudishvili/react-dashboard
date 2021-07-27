@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { propertyKeyToLabel } from '@/utils/base';
 import { Button, Card, CardContent, CardHeader, TextField } from '@material-ui/core';
-import { ElemsRenderer, Preferences } from '@/components';
+import { ElemsRenderer, ImageSelector, Preferences } from '@/components';
 import PropTypes from 'prop-types';
 
 const PageCreate = ({ saveHandler, initialValues }) => {
@@ -27,9 +27,7 @@ const PageCreate = ({ saveHandler, initialValues }) => {
   const aboutElems = [
     <TextField {...generateTextFieldProps('title')} />,
     <TextField {...generateTextFieldProps('slug')} />,
-    <TextField {...generateTextFieldProps('image')} />,
     <TextField {...generateTextFieldProps('shortDescription')} />,
-    <TextField {...generateTextFieldProps('innerImage')} />,
     <TextField {...generateTextFieldProps('logo')} />,
     <TextField {...generateTextFieldProps('logoTitle')} />,
     <TextField {...generateTextFieldProps('description')} />,
@@ -48,6 +46,16 @@ const PageCreate = ({ saveHandler, initialValues }) => {
         <ElemsRenderer elems={aboutElems} />
       </CardContent>
     </Card>,
+    <ImageSelector
+      title="Image Source"
+      value={values.image}
+      onSelect={(value) => handleValueUpdate({ field: 'image', value })}
+    />,
+    <ImageSelector
+      title="Inner Image Source"
+      value={values.innerImage}
+      onSelect={(value) => handleValueUpdate({ field: 'innerImage', value })}
+    />,
 
     <Button color="primary" variant="contained" onClick={onSave}>
       Save
