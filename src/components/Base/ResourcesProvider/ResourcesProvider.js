@@ -1,6 +1,7 @@
 import { AboutEdit } from '@/views/About';
 import { AgenciesList, AgencyCreate } from '@/views/Agencies';
 import { PageCreate, PagesList } from '@/views/Pages';
+import { StudioCreate, StudiosList } from '@/views/Studios';
 import { Resource } from '..';
 
 const resources = [
@@ -17,6 +18,13 @@ const resources = [
     list: AgenciesList,
     create: AgencyCreate,
     edit: AgencyCreate
+  },
+  {
+    name: 'Studios',
+    resource: 'studios',
+    list: StudiosList,
+    create: StudioCreate,
+    edit: StudioCreate
   },
   {
     name: 'About',

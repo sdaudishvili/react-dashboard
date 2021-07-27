@@ -36,6 +36,21 @@ export default [
         ]
       },
       {
+        title: 'Studios',
+        href: '/studios',
+        icon: MenuBookIcon,
+        children: [
+          {
+            title: 'Browse Studios',
+            href: '/studios'
+          },
+          {
+            title: 'Add Studio',
+            href: '/studios/create'
+          }
+        ]
+      },
+      {
         title: 'About',
         href: '/about',
         icon: InfoIcon
