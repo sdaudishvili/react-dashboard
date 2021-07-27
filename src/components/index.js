@@ -19,5 +19,7 @@ export { default as ListRenderer } from './ListRenderer';
 export { default as Dropzone } from './Dropzone';
 export { default as BaseRoutesProvider } from './BaseRoutesProvider';
 export { default as Cropper } from './Cropper';
+export { default as Editor } from './Editor';
+export { default as ImageSelector } from './ImageSelector';
 
 export * from './CardComponents';

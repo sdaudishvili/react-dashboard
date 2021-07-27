@@ -2,9 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Card, CardActions, CardContent, CardHeader } from '@material-ui/core';
 import { Dropzone } from '@/components';
-import CropperJS from 'react-cropper';
-import 'cropperjs/dist/cropper.css';
-import { cropImage } from '@/api/uploadProvider';
+import { uploadImage } from '@/api/uploadProvider';
 import { makeStyles } from '@material-ui/styles';
 import { useSnackbar } from 'notistack';
 import { generateErrorMsg } from '@/utils/messages/generateErrorMsg';
@@ -21,25 +19,18 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Cropper = (props) => {
-  const { className, onSelect, value, title, aspectRatio } = props;
+const ImageSelector = (props) => {
+  const { className, onSelect, value, title } = props;
   const [src, setSrc] = React.useState(null);
   const classes = useStyles();
 
-  const cropperRef = React.useRef(null);
   const { enqueueSnackbar } = useSnackbar();
 
-  const onCrop = async () => {
-    const { cropper } = cropperRef.current;
-    const cropData = cropper.getData();
+  const selectHandler = async () => {
     const fd = new FormData();
-    fd.append('Image', src.file);
-    fd.append('X', Math.round(cropData.x));
-    fd.append('Y', Math.round(cropData.y));
-    fd.append('Width', Math.round(cropData.width));
-    fd.append('Height', Math.round(cropData.height));
+    fd.append('File', src.file);
     try {
-      const res = await cropImage(fd);
+      const res = await uploadImage(fd);
       const { name } = res;
       if (name) {
         setSrc(null);
@@ -63,33 +54,13 @@ const Cropper = (props) => {
         ) : (
           <>
             <Dropzone onSelect={setSrc} />
-            {src && (
-              <div className={classes.cropper}>
-                <CropperJS
-                  ref={cropperRef}
-                  src={src.image}
-                  style={{ height: 300, width: '100%' }}
-                  aspectRatio={aspectRatio}
-                  scalable
-                  zoomable={false}
-                  viewMode={2}
-                  ready={() => {
-                    const { cropper } = cropperRef.current;
-                    const contData = cropper.getContainerData();
-                    cropper.setCropBoxData({
-                      height: contData.height,
-                      width: contData.width
-                    });
-                  }}
-                />
-              </div>
-            )}
+            {src && <img className={classes.image} src={src.image} alt="" />}
           </>
         )}
         <CardActions>
           {src && (
-            <Button variant="contained" color="primary" style={{ marginLeft: 'auto' }} onClick={onCrop}>
-              Crop
+            <Button variant="contained" color="primary" style={{ marginLeft: 'auto' }} onClick={selectHandler}>
+              Select
             </Button>
           )}
           {value && (
@@ -103,20 +74,18 @@ const Cropper = (props) => {
   );
 };
 
-Cropper.propTypes = {
+ImageSelector.propTypes = {
   className: PropTypes.string,
-  aspectRatio: PropTypes.number,
   value: PropTypes.string,
   onSelect: PropTypes.func,
   title: PropTypes.string
 };
 
-Cropper.defaultProps = {
+ImageSelector.defaultProps = {
   className: '',
-  aspectRatio: undefined,
   value: '',
   title: '',
   onSelect: () => {}
 };
 
-export default Cropper;
+export default ImageSelector;

@@ -45,13 +45,16 @@ const toBase64 = (file) =>
   });
 
 const Dropzone = (props) => {
-  const { className, pattern, multiple, aspectRatio, onSelect, blockedFormat, ...rest } = props;
+  const { className, onSelect, ...rest } = props;
   const classes = useStyles();
+
+  const inputRef = React.useRef();
 
   const sel = async (e) => {
     const [file] = e.target.files;
     const base64 = await toBase64(file);
     onSelect({ image: base64, name: file.name, file });
+    inputRef.current.value = '';
   };
 
   return (
@@ -68,7 +71,7 @@ const Dropzone = (props) => {
             Browse <Link underline="always">files</Link>
           </Typography>
         </div>
-        <input id="input" onChange={sel} className={classes.input} type="file" />
+        <input id="input" ref={inputRef} onChange={sel} className={classes.input} type="file" />
       </label>
     </div>
   );
@@ -76,20 +79,12 @@ const Dropzone = (props) => {
 
 Dropzone.propTypes = {
   className: PropTypes.string,
-  pattern: PropTypes.string,
-  multiple: PropTypes.bool,
-  aspectRatio: PropTypes.number,
-  onSelect: PropTypes.func,
-  blockedFormat: PropTypes.array
+  onSelect: PropTypes.func
 };
 
 Dropzone.defaultProps = {
   className: '',
-  pattern: PropTypes.string,
-  multiple: false,
-  aspectRatio: 0,
-  onSelect: () => {},
-  blockedFormat: []
+  onSelect: () => {}
 };
 
 export default Dropzone;

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { propertyKeyToLabel } from '@/utils/base';
 import { Button, Card, CardContent, CardHeader, TextField } from '@material-ui/core';
-import { ElemsRenderer, Cropper, Preferences } from '@/components';
+import { ElemsRenderer, Cropper, Preferences, CardRenderer, Editor } from '@/components';
 import PropTypes from 'prop-types';
+import ImageSelector from '@/components/ImageSelector';
 
 const PageCreate = ({ saveHandler, initialValues }) => {
   const [values, setValues] = useState({ ...initialValues });
@@ -28,10 +29,7 @@ const PageCreate = ({ saveHandler, initialValues }) => {
     <TextField {...generateTextFieldProps('title')} />,
     <TextField {...generateTextFieldProps('slug')} />,
     <TextField {...generateTextFieldProps('shortDescription')} />,
-    <TextField {...generateTextFieldProps('logo')} />,
-    <TextField {...generateTextFieldProps('logoTitle')} />,
-    <TextField {...generateTextFieldProps('description')} />,
-    <TextField {...generateTextFieldProps('color')} />
+    <TextField type="color" {...generateTextFieldProps('color')} />
   ];
 
   const cardElems = [
@@ -46,6 +44,12 @@ const PageCreate = ({ saveHandler, initialValues }) => {
         <ElemsRenderer elems={aboutElems} />
       </CardContent>
     </Card>,
+    <CardRenderer title="Description">
+      <Editor
+        initialValue={values.description}
+        onChange={(value) => handleValueUpdate({ field: 'description', value })}
+      />
+    </CardRenderer>,
     <Cropper
       title="Image Source"
       value={values.image}
@@ -55,6 +59,14 @@ const PageCreate = ({ saveHandler, initialValues }) => {
       title="Inner Image Source"
       value={values.innerImage}
       onSelect={(value) => handleValueUpdate({ field: 'innerImage', value })}
+    />,
+    <CardRenderer>
+      <TextField {...generateTextFieldProps('logoTitle')} />
+    </CardRenderer>,
+    <ImageSelector
+      title="Logo Source"
+      value={values.logo}
+      onSelect={(value) => handleValueUpdate({ field: 'logo', value })}
     />,
 
     <Button color="primary" variant="contained" onClick={onSave}>
