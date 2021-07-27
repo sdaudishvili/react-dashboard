@@ -1,9 +1,35 @@
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import InfoIcon from '@material-ui/icons/Info';
+import ContactsIcon from '@material-ui/icons/Contacts';
+import EditIcon from '@material-ui/icons/Edit';
+import MovieIcon from '@material-ui/icons/Movie';
+import BrandingWatermarkIcon from '@material-ui/icons/BrandingWatermark';
+import ShareIcon from '@material-ui/icons/Share';
 
 export default [
   {
     title: 'Management',
+    pages: [
+      {
+        title: 'Open Graph',
+        href: '/opengraph',
+        icon: ShareIcon
+      },
+      {
+        title: 'Contact',
+        href: '/contact',
+        icon: ContactsIcon
+      },
+      {
+        title: 'Social',
+        href: '/social',
+        icon: InfoIcon
+      }
+    ]
+  },
+
+  {
+    title: 'Pages',
     pages: [
       {
         title: 'Pages',
@@ -23,7 +49,7 @@ export default [
       {
         title: 'Agencies',
         href: '/agencies',
-        icon: MenuBookIcon,
+        icon: BrandingWatermarkIcon,
         children: [
           {
             title: 'Browse Agencies',
@@ -38,7 +64,7 @@ export default [
       {
         title: 'Studios',
         href: '/studios',
-        icon: MenuBookIcon,
+        icon: MovieIcon,
         children: [
           {
             title: 'Browse Studios',
@@ -53,7 +79,7 @@ export default [
       {
         title: 'About',
         href: '/about',
-        icon: InfoIcon
+        icon: EditIcon
       }
     ]
   }

@@ -1,6 +1,9 @@
 import { AboutEdit } from '@/views/About';
 import { AgenciesList, AgencyCreate } from '@/views/Agencies';
+import { ContactEdit } from '@/views/Contact';
+import { OpenGraphEdit } from '@/views/OpenGraph';
 import { PageCreate, PagesList } from '@/views/Pages';
+import { SocialEdit } from '@/views/Social';
 import { StudioCreate, StudiosList } from '@/views/Studios';
 import { Resource } from '..';
 
@@ -30,6 +33,21 @@ const resources = [
     name: 'About',
     resource: 'about',
     staticEdit: AboutEdit
+  },
+  {
+    name: 'Contact',
+    resource: 'contact',
+    staticEdit: ContactEdit
+  },
+  {
+    name: 'Social',
+    resource: 'social',
+    staticEdit: SocialEdit
+  },
+  {
+    name: 'Open Graph',
+    resource: 'opengraph',
+    staticEdit: OpenGraphEdit
   }
 ];
 

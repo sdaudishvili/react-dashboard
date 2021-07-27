@@ -4,7 +4,7 @@ import { Button, Card, CardContent, CardHeader, TextField } from '@material-ui/c
 import { Cropper, ElemsRenderer } from '@/components';
 import PropTypes from 'prop-types';
 
-const AboutEdit = ({ saveHandler, initialValues }) => {
+const OpenGraphEdit = ({ saveHandler, initialValues }) => {
   const [values, setValues] = useState({ ...initialValues });
 
   const onSave = () => {
@@ -25,23 +25,23 @@ const AboutEdit = ({ saveHandler, initialValues }) => {
   });
 
   const aboutElems = [
-    <TextField {...generateTextFieldProps('title')} />,
-    <TextField {...generateTextFieldProps('shortDescription')} />,
-    <TextField {...generateTextFieldProps('contentTitle')} />,
-    <TextField {...generateTextFieldProps('description')} />,
-    <TextField {...generateTextFieldProps('video')} />
+    <TextField {...generateTextFieldProps('shareTitle')} />,
+    <TextField {...generateTextFieldProps('shareDescription')} />,
+    <TextField {...generateTextFieldProps('keywords')} />
   ];
 
   const cardElems = [
     <Card>
-      <CardHeader title="About" />
+      <CardHeader title="Info" />
       <CardContent>
         <ElemsRenderer elems={aboutElems} />
       </CardContent>
     </Card>,
-    <Cropper title="Image" value={values.image} onSelect={(value) => handleValueUpdate({ field: 'image', value })} />,
-    <Cropper title="Image" value={values.image2} onSelect={(value) => handleValueUpdate({ field: 'image2', value })} />,
-
+    <Cropper
+      title="Share Image"
+      value={values.shareImage}
+      onSelect={(value) => handleValueUpdate({ field: 'shareImage', value })}
+    />,
     <Button color="primary" variant="contained" onClick={onSave}>
       Save
     </Button>
@@ -50,14 +50,14 @@ const AboutEdit = ({ saveHandler, initialValues }) => {
   return <ElemsRenderer elems={cardElems} />;
 };
 
-AboutEdit.propTypes = {
+OpenGraphEdit.propTypes = {
   saveHandler: PropTypes.func,
   initialValues: PropTypes.object
 };
 
-AboutEdit.defaultProps = {
+OpenGraphEdit.defaultProps = {
   saveHandler: () => {},
   initialValues: {}
 };
 
-export default AboutEdit;
+export default OpenGraphEdit;

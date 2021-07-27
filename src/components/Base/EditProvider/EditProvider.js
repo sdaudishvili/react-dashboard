@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
 const EditProvider = (props) => {
   const { resourceName, resource, component: Component, baseRoute } = props;
   const [record, setRecord] = React.useState({});
+  const [fetched, setFetched] = React.useState(false);
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
 
@@ -34,6 +35,7 @@ const EditProvider = (props) => {
       try {
         const res = await getOne(resource, id);
         setRecord(res);
+        setFetched(true);
       } catch (err) {
         if (err.errors) {
           err.errors.forEach((err) => enqueueSnackbar(generateErrorMsg(err), { variant: 'error' }));
@@ -68,7 +70,7 @@ const EditProvider = (props) => {
           </Button>
         )}
       </PageHead>
-      {Object.keys(record).length > 0 && <Component saveHandler={saveHandler} initialValues={record} />}
+      {fetched && <Component saveHandler={saveHandler} initialValues={record} />}
     </Page>
   );
 };
