@@ -4,6 +4,8 @@ import { Button, Card, CardContent, CardHeader, TextField } from '@material-ui/c
 import { ElemsRenderer, Cropper, Preferences, CardRenderer, Editor } from '@/components';
 import PropTypes from 'prop-types';
 import ImageSelector from '@/components/ImageSelector';
+import { getUniqueSlug } from '@/api/dataProvider';
+import debounce from '@/utils/debounce';
 
 const PageCreate = ({ saveHandler, initialValues }) => {
   const [values, setValues] = useState({ ...initialValues });
@@ -21,15 +23,35 @@ const PageCreate = ({ saveHandler, initialValues }) => {
     label: propertyKeyToLabel(key),
     name: key,
     value: values[key] || '',
-    variant: 'outlined',
-    onChange: ({ target: { value } }) => handleValueUpdate({ field: key, value })
+    variant: 'outlined'
   });
 
+  const handleSlugUpdate = () => async (value) => {
+    const slug = await getUniqueSlug('pages', { text: value });
+    handleValueUpdate({ field: 'slug', value: slug });
+  };
+  const debouncedHandleSlugUpdate = React.useCallback(debounce(handleSlugUpdate(), 500), []);
+
+  const onTitleChange = ({ target: { value } }) => {
+    handleValueUpdate({ field: 'title', value });
+    debouncedHandleSlugUpdate(value);
+  };
+
   const aboutElems = [
-    <TextField {...generateTextFieldProps('title')} />,
-    <TextField {...generateTextFieldProps('slug')} />,
-    <TextField {...generateTextFieldProps('shortDescription')} />,
-    <TextField type="color" {...generateTextFieldProps('color')} />
+    <TextField {...generateTextFieldProps('title')} onChange={onTitleChange} />,
+    <TextField
+      {...generateTextFieldProps('slug')}
+      onChange={({ target: { value } }) => handleValueUpdate({ field: 'slug', value })}
+    />,
+    <TextField
+      {...generateTextFieldProps('shortDescription')}
+      onChange={({ target: { value } }) => handleValueUpdate({ field: 'shortDescription', value })}
+    />,
+    <TextField
+      type="color"
+      {...generateTextFieldProps('color')}
+      onChange={({ target: { value } }) => handleValueUpdate({ field: 'color', value })}
+    />
   ];
 
   const cardElems = [

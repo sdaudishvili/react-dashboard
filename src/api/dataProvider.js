@@ -48,3 +48,12 @@ export const deleteOne = async (resource, id) => {
     axios.delete(`${apiBaseUrl}/${resource}/${id}`).then(handleSuccess(resolve)).catch(handleError(reject))
   );
 };
+
+export const getUniqueSlug = async (resource, payload) => {
+  return new Promise((resolve, reject) =>
+    axios
+      .get(`${apiBaseUrl}/${resource}/slug${buildQuery(payload)}`)
+      .then(handleSuccess(resolve))
+      .catch(handleError(reject))
+  );
+};
