@@ -1,46 +1,29 @@
-import WidgetsIcon from '@material-ui/icons/Widgets';
-
-import CardGiftcardIcon from '@material-ui/icons/CardGiftcard';
-import DescriptionIcon from '@material-ui/icons/Description';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
+import InfoIcon from '@material-ui/icons/Info';
 
 export default [
   {
     title: 'Management',
     pages: [
       {
-        title: 'Categories',
-        href: '/categories',
-        icon: WidgetsIcon,
+        title: 'Pages',
+        href: '/pages',
+        icon: MenuBookIcon,
         children: [
           {
-            title: 'Browse Categories',
-            href: '/categories'
+            title: 'Browse Pages',
+            href: '/pages'
           },
           {
-            title: 'Add Category',
-            href: '/categories/create'
+            title: 'Add Page',
+            href: '/pages/create'
           }
         ]
       },
       {
-        title: 'Gifts',
-        href: '/gifts',
-        icon: CardGiftcardIcon,
-        children: [
-          {
-            title: 'Browse Gifts',
-            href: '/gifts'
-          },
-          {
-            title: 'Add Gift',
-            href: '/gifts/create'
-          }
-        ]
-      },
-      {
-        title: 'Footer file',
-        href: '/footer-file',
-        icon: DescriptionIcon
+        title: 'About',
+        href: '/about',
+        icon: InfoIcon
       }
     ]
   }
