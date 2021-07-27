@@ -27,6 +27,19 @@ export const getOne = async (resource, id) => {
   }
 };
 
+export const getStatic = async (resource) => {
+  try {
+    const res = await axios.get(`${apiBaseUrl}/${resource}`);
+    return res.data;
+  } catch (error) {
+    if (error.response && error.response.data) {
+      throw error.response.data;
+    } else {
+      throw error;
+    }
+  }
+};
+
 export const create = async (resource, values) => {
   try {
     await axios.post(`${apiBaseUrl}/${resource}`, values);
@@ -51,7 +64,7 @@ export const updateOne = async (resource, values) => {
   }
 };
 
-export const update = async (resource, values) => {
+export const updateStatic = async (resource, values) => {
   try {
     await axios.put(`${apiBaseUrl}/${resource}`, values);
   } catch (error) {

@@ -2,11 +2,12 @@ import Dashboard from '@/layouts/Dashboard';
 import PropTypes from 'prop-types';
 import { Route, Switch } from 'react-router-dom';
 import { ListProvider, CreateProvider, EditProvider } from '..';
+import { StaticEditProvider } from '../StaticEditProvider';
 
 const Resource = (props) => {
-  const { name, list, create, edit } = props;
+  const { name, resource, list, create, edit, staticEdit } = props;
 
-  const baseRoute = `/${name}`;
+  const baseRoute = `/${resource}`;
   const createRoute = `${baseRoute}/create`;
   const editRoute = `${baseRoute}/:id`;
 
@@ -18,7 +19,7 @@ const Resource = (props) => {
           path={createRoute}
           render={() => (
             <Dashboard>
-              <CreateProvider resourceName={name} component={create} baseRoute={baseRoute} />
+              <CreateProvider resourceName={name} resource={resource} component={create} baseRoute={baseRoute} />
             </Dashboard>
           )}
         />
@@ -29,7 +30,7 @@ const Resource = (props) => {
           path={editRoute}
           render={() => (
             <Dashboard>
-              <EditProvider resourceName={name} component={edit} baseRoute={baseRoute} />
+              <EditProvider resourceName={name} resource={resource} component={edit} baseRoute={baseRoute} />
             </Dashboard>
           )}
         />
@@ -42,10 +43,22 @@ const Resource = (props) => {
             <Dashboard>
               <ListProvider
                 resourceName={name}
+                resource={resource}
                 component={list}
                 createRoute={create && createRoute}
                 editRoute={edit && baseRoute}
               />
+            </Dashboard>
+          )}
+        />
+      )}
+      {staticEdit && (
+        <Route
+          exact
+          path={baseRoute}
+          render={() => (
+            <Dashboard>
+              <StaticEditProvider component={staticEdit} resourceName={name} resource={resource} />
             </Dashboard>
           )}
         />
@@ -56,15 +69,18 @@ const Resource = (props) => {
 
 Resource.propTypes = {
   name: PropTypes.string.isRequired,
+  resource: PropTypes.string.isRequired,
   list: PropTypes.any,
   create: PropTypes.any,
-  edit: PropTypes.any
+  edit: PropTypes.any,
+  staticEdit: PropTypes.any
 };
 
 Resource.defaultProps = {
   list: null,
   create: null,
-  edit: null
+  edit: null,
+  staticEdit: null
 };
 
 export default Resource;

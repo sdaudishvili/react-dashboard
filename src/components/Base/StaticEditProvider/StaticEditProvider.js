@@ -1,13 +1,10 @@
 import Page from '@/components/Page';
 import PageHead from '@/components/PageHead';
-import { Button } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import { Link as RouterLink } from 'react-router-dom';
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
-import { create } from '@/dataProvider';
+import { getStatic, updateStatic } from '@/dataProvider';
 import { useSnackbar } from 'notistack';
-import useRouter from '@/utils/useRouter';
 import { messages } from '@/utils/messages';
 import { generateErrorMsg } from '@/utils/messages/generateErrorMsg';
 
@@ -20,18 +17,32 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const CreateProvider = (props) => {
-  const { resourceName, resource, component: Component, baseRoute } = props;
+const EditProvider = (props) => {
+  const { resourceName, resource, component: Component } = props;
+  const [record, setRecord] = React.useState({});
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
 
-  const router = useRouter();
+  React.useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await getStatic(resource);
+        setRecord(res);
+      } catch (err) {
+        if (err.errors) {
+          err.errors.forEach((err) => enqueueSnackbar(generateErrorMsg(err), { variant: 'error' }));
+        } else {
+          enqueueSnackbar(err.toString(), { variant: 'error' });
+        }
+      }
+    };
+    fetchData();
+  }, []);
 
   const saveHandler = async (values) => {
     try {
-      await create(resource, values);
-      enqueueSnackbar(messages.CreateSuccess, { variant: 'success' });
-      router.history.push(baseRoute);
+      await updateStatic(resource, values);
+      enqueueSnackbar(messages.UpdateSuccess, { variant: 'success' });
     } catch (err) {
       if (err.errors) {
         err.errors.forEach((err) => enqueueSnackbar(generateErrorMsg(err), { variant: 'error' }));
@@ -42,29 +53,21 @@ const CreateProvider = (props) => {
   };
 
   return (
-    <Page className={classes.root} title="Create">
-      <PageHead h2={resourceName} h1="Create">
-        {baseRoute && (
-          <Button component={RouterLink} to={baseRoute} color="primary" variant="contained">
-            Return to list
-          </Button>
-        )}
-      </PageHead>
-      <Component saveHandler={saveHandler} />
+    <Page className={classes.root} title="Edit">
+      <PageHead h2={resourceName} h1="Edit" />
+      {Object.keys(record).length > 0 && <Component saveHandler={saveHandler} initialValues={record} />}
     </Page>
   );
 };
 
-CreateProvider.propTypes = {
+EditProvider.propTypes = {
   resourceName: PropTypes.string.isRequired,
   resource: PropTypes.string.isRequired,
-  baseRoute: PropTypes.string,
   component: PropTypes.any
 };
 
-CreateProvider.defaultProps = {
-  component: null,
-  baseRoute: null
+EditProvider.defaultProps = {
+  component: null
 };
 
-export default CreateProvider;
+export default EditProvider;
