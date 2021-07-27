@@ -21,6 +21,21 @@ export default [
         ]
       },
       {
+        title: 'Agencies',
+        href: '/agencies',
+        icon: MenuBookIcon,
+        children: [
+          {
+            title: 'Browse Agencies',
+            href: '/agencies'
+          },
+          {
+            title: 'Add Agency',
+            href: '/agencies/create'
+          }
+        ]
+      },
+      {
         title: 'About',
         href: '/about',
         icon: InfoIcon

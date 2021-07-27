@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   actions: {
     whiteSpace: 'nowrap'
   },
-  nameCell: {
+  imageCell: {
     display: 'flex',
     alignItems: 'center'
   },
@@ -76,6 +76,20 @@ const ListRenderer = (props) => {
     handleDeleteModalClose();
   };
 
+  const renderContent = (item, options) => {
+    const value = getValueByPath(item, options.prop);
+    if (item.isHtml) {
+      return <div dangerouslySetInnerHTML={{ __html: value }} />;
+    }
+    if (typeof value === 'boolean') {
+      return value ? <CheckCircleIcon color="secondary" /> : <CancelIcon color="action" />;
+    }
+    if (options.get) {
+      return options.get(value);
+    }
+    return value;
+  };
+
   return (
     <div className={classes.inner}>
       <Table>
@@ -93,38 +107,16 @@ const ListRenderer = (props) => {
             items.map((item, i) => (
               <TableRow hover key={item.id || JSON.stringify(i)}>
                 {displayKeys &&
-                  displayKeys.map((x) =>
-                    x.imageKey ? (
-                      <TableCell key={x.prop}>
-                        <div className={classes.nameCell}>
-                          <Avatar className={classes.avatar} src={getValueByPath(item, x.imageKey)}>
-                            {' '}
-                          </Avatar>
-                          {x.isHtml ? (
-                            <div dangerouslySetInnerHTML={{ __html: String(getValueByPath(item, x.prop)) }} />
-                          ) : (
-                            <div>{String(getValueByPath(item, x.prop))}</div>
-                          )}
-                        </div>
-                      </TableCell>
-                    ) : (
-                      <React.Fragment key={x.prop}>
-                        {typeof item[x.prop] === 'boolean' ? (
-                          <TableCell>
-                            {item[x.prop] ? <CheckCircleIcon color="secondary" /> : <CancelIcon color="action" />}
-                          </TableCell>
-                        ) : (
-                          <TableCell>
-                            {x.isHtml ? (
-                              <div dangerouslySetInnerHTML={{ __html: String(getValueByPath(item, x.prop)) }} />
-                            ) : (
-                              String(getValueByPath(item, x.prop))
-                            )}
-                          </TableCell>
-                        )}
-                      </React.Fragment>
-                    )
-                  )}
+                  displayKeys.map((x) => (
+                    <TableCell className={x.imageKey && classes.imageCell} key={x.prop}>
+                      {x.imageKey && (
+                        <Avatar className={classes.avatar} src={getValueByPath(item, x.imageKey)}>
+                          {' '}
+                        </Avatar>
+                      )}
+                      {renderContent(item, x)}
+                    </TableCell>
+                  ))}
                 <TableCell align="right" className={classes.actions}>
                   {editRoute && (
                     <Button
