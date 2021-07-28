@@ -11,7 +11,7 @@ import {
   Select,
   TextField
 } from '@material-ui/core';
-import { ElemsRenderer, Cropper, Preferences, CardRenderer, Editor } from '@/components';
+import { ElemsRenderer, Cropper, Preferences, CardRenderer, Editor, MediaList } from '@/components';
 import PropTypes from 'prop-types';
 import ImageSelector from '@/components/ImageSelector';
 import { getUniqueSlug } from '@/api/dataProvider';
@@ -109,6 +109,7 @@ const AgencyCreate = ({ saveHandler, initialValues }) => {
       value={values.logo}
       onSelect={(value) => handleValueUpdate({ field: 'logo', value })}
     />,
+    <MediaList items={values.mediaList} onListChange={(value) => handleValueUpdate({ field: 'mediaList', value })} />,
 
     <Button color="primary" variant="contained" onClick={onSave}>
       Save

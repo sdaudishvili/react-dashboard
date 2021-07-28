@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -59,7 +60,7 @@ const Dropzone = (props) => {
 
   return (
     <div {...rest} className={clsx(classes.root, className)}>
-      <label htmlFor="input" className={classes.dropZone}>
+      <label className={classes.dropZone}>
         <div>
           <img alt="Select file" className={classes.image} src="/images/undraw_add_file2_gvbb.svg" />
         </div>
@@ -71,7 +72,7 @@ const Dropzone = (props) => {
             Browse <Link underline="always">files</Link>
           </Typography>
         </div>
-        <input id="input" ref={inputRef} onChange={sel} className={classes.input} type="file" />
+        <input ref={inputRef} onChange={sel} className={classes.input} type="file" />
       </label>
     </div>
   );
