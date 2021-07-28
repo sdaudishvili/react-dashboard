@@ -20,7 +20,7 @@ const BaseRoutesProvider = () => {
             />
           ))
         )}
-      <Redirect exact from="/" to="/pages" />
+      <Redirect exact from="/" to="/opengraph" />
     </Switch>
   );
 };

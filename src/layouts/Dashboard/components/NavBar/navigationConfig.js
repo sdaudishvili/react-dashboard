@@ -5,6 +5,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import MovieIcon from '@material-ui/icons/Movie';
 import BrandingWatermarkIcon from '@material-ui/icons/BrandingWatermark';
 import ShareIcon from '@material-ui/icons/Share';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 
 export default [
   {
@@ -80,6 +81,16 @@ export default [
         title: 'About',
         href: '/about',
         icon: EditIcon
+      }
+    ]
+  },
+  {
+    title: 'User',
+    pages: [
+      {
+        title: 'Account',
+        href: '/account',
+        icon: SupervisorAccountIcon
       }
     ]
   }
