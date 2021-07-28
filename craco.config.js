@@ -1,4 +1,9 @@
 const path = require('path');
+const Dotenv = require('dotenv-webpack');
+
+const appRoot = path.resolve(__dirname, './');
+
+const envPath = `${appRoot}/env/${process.env.SERVER}.env`;
 
 module.exports = {
   webpack: {
@@ -19,6 +24,7 @@ module.exports = {
           ]
         }
       ]
-    }
+    },
+    plugins: [new Dotenv({ path: envPath })]
   }
 };

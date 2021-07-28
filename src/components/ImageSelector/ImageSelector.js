@@ -6,8 +6,7 @@ import { uploadImage } from '@/api/uploadProvider';
 import { makeStyles } from '@material-ui/styles';
 import { useSnackbar } from 'notistack';
 import { generateErrorMsg } from '@/utils/messages/generateErrorMsg';
-
-const staticUrl = 'https://gravity-umbrella-static.leavingstone.club/';
+import { staticUrl } from '@/api/host';
 
 const useStyles = makeStyles((theme) => ({
   image: {

@@ -6,8 +6,7 @@ import CropperJS from 'react-cropper';
 import 'cropperjs/dist/cropper.css';
 import { cropImage } from '@/api/uploadProvider';
 import { makeStyles } from '@material-ui/styles';
-
-const staticUrl = 'https://gravity-umbrella-static.leavingstone.club/';
+import { staticUrl } from '@/api/host';
 
 const useStyles = makeStyles(() => ({
   image: {

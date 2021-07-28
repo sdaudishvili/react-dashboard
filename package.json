@@ -17,6 +17,8 @@
     "axios": "^0.21.1",
     "chart.js": "^3.4.1",
     "clsx": "^1.1.1",
+    "cross-env": "^7.0.3",
+    "dotenv-webpack": "^7.0.3",
     "formik": "^2.2.9",
     "history": "^5.0.0",
     "js-cookie": "^2.2.1",
@@ -38,8 +40,8 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "craco start",
-    "build": "craco build",
+    "dev": "cross-env SERVER=localhost craco start",
+    "build": "cross-env SERVER=leavingstone craco build",
     "test": "craco test",
     "eject": "react-scripts eject"
   },

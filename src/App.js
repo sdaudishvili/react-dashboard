@@ -14,6 +14,7 @@ import { NotificationProvider } from './context/notificationContext';
 const history = createBrowserHistory();
 
 const App = () => {
+  console.log(process.env.TEST);
   return (
     <ThemeProvider theme={theme}>
       <SnackbarProvider dense={false}>
