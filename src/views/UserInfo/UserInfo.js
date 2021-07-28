@@ -71,18 +71,14 @@ const Account = () => {
               </CardContent>
               <Divider />
               <CardActions>
-                {canRegister && (
-                  <Button
-                    color="primary"
-                    fullWidth
-                    variant="outlined"
-                    onClick={() => setRegisterAdminPopupIsVisible(true)}
-                  >
-                    Register New Admin
-                  </Button>
-                )}
-                <Button color="primary" fullWidth variant="outlined" disabled>
-                  {userInfo.email}
+                <Button
+                  color="primary"
+                  fullWidth
+                  variant="outlined"
+                  onClick={() => setRegisterAdminPopupIsVisible(true)}
+                  disabled={!canRegister}
+                >
+                  Register New Admin
                 </Button>
               </CardActions>
             </Card>
