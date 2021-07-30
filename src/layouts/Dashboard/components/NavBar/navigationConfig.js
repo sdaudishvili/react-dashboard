@@ -6,6 +6,7 @@ import MovieIcon from '@material-ui/icons/Movie';
 import BrandingWatermarkIcon from '@material-ui/icons/BrandingWatermark';
 import ShareIcon from '@material-ui/icons/Share';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import LoyaltyIcon from '@material-ui/icons/Loyalty';
 
 export default [
   {
@@ -80,7 +81,7 @@ export default [
       {
         title: 'Merch',
         href: '/merches',
-        icon: MovieIcon,
+        icon: LoyaltyIcon,
         children: [
           {
             title: 'Browse Merch',
