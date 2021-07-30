@@ -30,49 +30,49 @@ export default [
   },
 
   {
-    title: 'Pages',
+    title: 'Pages management',
     pages: [
       {
-        title: 'Pages',
+        title: 'Slider',
         href: '/pages',
         icon: MenuBookIcon,
         children: [
           {
-            title: 'Browse Pages',
+            title: 'Browse Slider',
             href: '/pages'
           },
           {
-            title: 'Add Page',
+            title: 'Create',
             href: '/pages/create'
           }
         ]
       },
       {
-        title: 'Agencies',
+        title: 'Creative Agency',
         href: '/agencies',
         icon: BrandingWatermarkIcon,
         children: [
           {
-            title: 'Browse Agencies',
+            title: 'Browse Creative Agency',
             href: '/agencies'
           },
           {
-            title: 'Add Agency',
+            title: 'Create',
             href: '/agencies/create'
           }
         ]
       },
       {
-        title: 'Studios',
+        title: 'Studio',
         href: '/studios',
         icon: MovieIcon,
         children: [
           {
-            title: 'Browse Studios',
+            title: 'Browse Studio',
             href: '/studios'
           },
           {
-            title: 'Add Studio',
+            title: 'Create',
             href: '/studios/create'
           }
         ]
@@ -85,7 +85,7 @@ export default [
     ]
   },
   {
-    title: 'User',
+    title: 'User management',
     pages: [
       {
         title: 'Account',

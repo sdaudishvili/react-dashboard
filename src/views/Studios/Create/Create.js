@@ -29,9 +29,9 @@ const StudioCreate = ({ saveHandler, initialValues }) => {
     setValues((prev) => ({ ...prev, [field]: value }));
   };
 
-  const generateTextFieldProps = (key) => ({
+  const generateTextFieldProps = (key, { label = '' } = {}) => ({
     fullWidth: true,
-    label: propertyKeyToLabel(key),
+    label: label || propertyKeyToLabel(key),
     name: key,
     value: values[key] || '',
     variant: 'outlined'
@@ -54,10 +54,7 @@ const StudioCreate = ({ saveHandler, initialValues }) => {
       {...generateTextFieldProps('slug')}
       onChange={({ target: { value } }) => handleValueUpdate({ field: 'slug', value })}
     />,
-    <TextField
-      {...generateTextFieldProps('shortDescription')}
-      onChange={({ target: { value } }) => handleValueUpdate({ field: 'shortDescription', value })}
-    />,
+
     <FormControl variant="outlined" fullWidth>
       <InputLabel>Type</InputLabel>
       <Select value={values.type || ''} label="Type">
@@ -70,7 +67,11 @@ const StudioCreate = ({ saveHandler, initialValues }) => {
           </MenuItem>
         ))}
       </Select>
-    </FormControl>
+    </FormControl>,
+    <TextField
+      {...generateTextFieldProps('innerTitle')}
+      onChange={({ target: { value } }) => handleValueUpdate({ field: 'innerTitle', value })}
+    />
   ];
 
   const cardElems = [
@@ -92,7 +93,7 @@ const StudioCreate = ({ saveHandler, initialValues }) => {
       />
     </CardRenderer>,
     <Cropper
-      title="Image Source"
+      title="Poster Source"
       value={values.image}
       onSelect={(value) => handleValueUpdate({ field: 'image', value })}
     />,
@@ -101,14 +102,18 @@ const StudioCreate = ({ saveHandler, initialValues }) => {
       value={values.innerImage}
       onSelect={(value) => handleValueUpdate({ field: 'innerImage', value })}
     />,
-    <CardRenderer>
-      <TextField {...generateTextFieldProps('logoTitle')} />
+    <CardRenderer title="Logo">
+      <ElemsRenderer
+        elems={[
+          <TextField {...generateTextFieldProps('logoTitle', { label: 'Title' })} />,
+          <ImageSelector
+            title="Source"
+            value={values.logo}
+            onSelect={(value) => handleValueUpdate({ field: 'logo', value })}
+          />
+        ]}
+      />
     </CardRenderer>,
-    <ImageSelector
-      title="Logo Source"
-      value={values.logo}
-      onSelect={(value) => handleValueUpdate({ field: 'logo', value })}
-    />,
     <MediaList items={values.mediaList} onListChange={(value) => handleValueUpdate({ field: 'mediaList', value })} />,
 
     <Button color="primary" variant="contained" onClick={onSave}>

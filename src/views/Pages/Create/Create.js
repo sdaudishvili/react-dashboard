@@ -18,9 +18,9 @@ const PageCreate = ({ saveHandler, initialValues }) => {
     setValues((prev) => ({ ...prev, [field]: value }));
   };
 
-  const generateTextFieldProps = (key) => ({
+  const generateTextFieldProps = (key, { label = '' } = {}) => ({
     fullWidth: true,
-    label: propertyKeyToLabel(key),
+    label: label || propertyKeyToLabel(key),
     name: key,
     value: values[key] || '',
     variant: 'outlined'
@@ -44,13 +44,13 @@ const PageCreate = ({ saveHandler, initialValues }) => {
       onChange={({ target: { value } }) => handleValueUpdate({ field: 'slug', value })}
     />,
     <TextField
-      {...generateTextFieldProps('shortDescription')}
-      onChange={({ target: { value } }) => handleValueUpdate({ field: 'shortDescription', value })}
-    />,
-    <TextField
       type="color"
       {...generateTextFieldProps('color')}
       onChange={({ target: { value } }) => handleValueUpdate({ field: 'color', value })}
+    />,
+    <TextField
+      {...generateTextFieldProps('innerTitle')}
+      onChange={({ target: { value } }) => handleValueUpdate({ field: 'innerTitle', value })}
     />
   ];
 
@@ -77,19 +77,18 @@ const PageCreate = ({ saveHandler, initialValues }) => {
       value={values.image}
       onSelect={(value) => handleValueUpdate({ field: 'image', value })}
     />,
-    <Cropper
-      title="Inner Image Source"
-      value={values.innerImage}
-      onSelect={(value) => handleValueUpdate({ field: 'innerImage', value })}
-    />,
-    <CardRenderer>
-      <TextField {...generateTextFieldProps('logoTitle')} />
+    <CardRenderer title="Logo">
+      <ElemsRenderer
+        elems={[
+          <TextField {...generateTextFieldProps('logoTitle', { label: 'Title' })} />,
+          <ImageSelector
+            title="Source"
+            value={values.logo}
+            onSelect={(value) => handleValueUpdate({ field: 'logo', value })}
+          />
+        ]}
+      />
     </CardRenderer>,
-    <ImageSelector
-      title="Logo Source"
-      value={values.logo}
-      onSelect={(value) => handleValueUpdate({ field: 'logo', value })}
-    />,
 
     <MediaList items={values.mediaList} onListChange={(value) => handleValueUpdate({ field: 'mediaList', value })} />,
 
