@@ -16,7 +16,7 @@ const StudiosList = ({ data, total, queryOptions, setQueryOptions, editRoute, on
         page={queryOptions.page}
         mt={3}
         count={total}
-        title="All Pages"
+        title="All Items"
         onPageChange={onPageChange}
         perPage={queryOptions.perPage}
       >

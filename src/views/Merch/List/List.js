@@ -14,7 +14,7 @@ const MerchList = ({ data, total, editRoute, onDeleteClick }) => {
         page={options.page}
         mt={3}
         count={total}
-        title="All Pages"
+        title="All items"
         onPageChange={onPageChange}
         perPage={options.perPage}
       >

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { propertyKeyToLabel } from '@/utils/base';
 import { Button, Card, CardContent, CardHeader, TextField } from '@material-ui/core';
-import { ElemsRenderer } from '@/components';
+import { ElemsRenderer, Cropper } from '@/components';
 import PropTypes from 'prop-types';
 
 const MerchCreate = ({ saveHandler, initialValues }) => {
@@ -26,8 +26,7 @@ const MerchCreate = ({ saveHandler, initialValues }) => {
 
   const aboutElems = [
     <TextField {...generateTextFieldProps('price')} />,
-    <TextField {...generateTextFieldProps('url')} />,
-    <TextField {...generateTextFieldProps('image')} />
+    <TextField {...generateTextFieldProps('url')} />
   ];
 
   const cardElems = [
@@ -37,7 +36,11 @@ const MerchCreate = ({ saveHandler, initialValues }) => {
         <ElemsRenderer elems={aboutElems} />
       </CardContent>
     </Card>,
-
+    <Cropper
+      title="Image Source"
+      value={values.image}
+      onSelect={(value) => handleValueUpdate({ field: 'image', value })}
+    />,
     <Button color="primary" variant="contained" onClick={onSave}>
       Save
     </Button>

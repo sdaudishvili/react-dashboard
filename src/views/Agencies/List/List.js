@@ -16,7 +16,7 @@ const AgenciesList = ({ data, total, queryOptions, setQueryOptions, editRoute, o
         page={queryOptions.page}
         mt={3}
         count={total}
-        title="All Pages"
+        title="All Items"
         onPageChange={onPageChange}
         perPage={queryOptions.perPage}
       >
