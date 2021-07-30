@@ -78,6 +78,21 @@ export default [
         ]
       },
       {
+        title: 'Merch',
+        href: '/merches',
+        icon: MovieIcon,
+        children: [
+          {
+            title: 'Browse Merch',
+            href: '/merches'
+          },
+          {
+            title: 'Create',
+            href: '/merches/create'
+          }
+        ]
+      },
+      {
         title: 'About',
         href: '/about',
         icon: EditIcon
