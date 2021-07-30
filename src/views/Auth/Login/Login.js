@@ -11,6 +11,8 @@ import useRouter from '@/utils/useRouter';
 import Cookies from 'js-cookie';
 import { useUser } from '@/context/userContext';
 import { apiBaseUrl } from '@/api/host';
+import { messages } from '@/utils/messages';
+import { useSnackbar } from 'notistack';
 import { LoginForm } from './components';
 
 const useStyles = makeStyles((theme) => ({
@@ -73,6 +75,7 @@ const Login = () => {
   const classes = useStyles();
   const { setUser } = useUser();
 
+  const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
 
   React.useEffect(() => {
@@ -86,13 +89,15 @@ const Login = () => {
       const { data } = await axios.post(`${apiBaseUrl}/auth/login`, values);
       const { signInResult, token: tokenResponse } = data;
       if (signInResult.succeeded) {
-        const { token, refershToken } = tokenResponse;
+        const { token, refreshToken } = tokenResponse;
         setUser(token);
-        setAuthTokens(token, refershToken);
+        setAuthTokens(token, refreshToken);
         router.history.push('/');
+      } else {
+        enqueueSnackbar(messages.IncorrectCredentials, { variant: 'error' });
       }
     } catch (err) {
-      console.log(err);
+      enqueueSnackbar(err.toString(), { variant: 'error' });
     }
   };
 

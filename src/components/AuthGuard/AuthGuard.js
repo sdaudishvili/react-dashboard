@@ -7,6 +7,7 @@ import useRouter from '@/utils/useRouter';
 import removeAuthTokens from '@/utils/removeAuthTokens';
 import parseJwt from '@/utils/parseJWT';
 import { useUser } from '@/context/userContext';
+import { refreshToken } from '@/api/authProvider';
 
 const getToken = () => Cookies.get('token');
 
@@ -32,7 +33,8 @@ const AuthGuard = (props) => {
     if (token) {
       setUser(parseJwt(token));
       enableInterceptors({
-        handleUnauthorized: handleUnauthorizedRequest
+        handleUnauthorized: handleUnauthorizedRequest,
+        refreshToken
       });
     }
 

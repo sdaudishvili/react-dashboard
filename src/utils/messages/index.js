@@ -3,5 +3,6 @@ export const messages = {
   CreateSuccess: 'Successfully created!',
   DeleteSuccess: 'Successfully deleted!',
   UnAuthorizedRequest: 'Please Login in to continue!',
-  ErrorOccured: 'Error occured!'
+  ErrorOccured: 'Error occured!',
+  IncorrectCredentials: 'Incorrect Credentials!'
 };
