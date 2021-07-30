@@ -5,7 +5,7 @@ import { ListProvider, CreateProvider, EditProvider } from '..';
 import { StaticEditProvider } from '../StaticEditProvider';
 
 const Resource = (props) => {
-  const { name, resource, list, create, edit, staticEdit } = props;
+  const { name, resource, list, create, edit, staticEdit, hasApiPagination } = props;
 
   const baseRoute = `/${resource}`;
   const createRoute = `${baseRoute}/create`;
@@ -42,6 +42,7 @@ const Resource = (props) => {
           render={() => (
             <Dashboard>
               <ListProvider
+                hasApiPagination={hasApiPagination}
                 resourceName={name}
                 resource={resource}
                 component={list}
@@ -73,14 +74,16 @@ Resource.propTypes = {
   list: PropTypes.any,
   create: PropTypes.any,
   edit: PropTypes.any,
-  staticEdit: PropTypes.any
+  staticEdit: PropTypes.any,
+  hasApiPagination: PropTypes.bool
 };
 
 Resource.defaultProps = {
   list: null,
   create: null,
   edit: null,
-  staticEdit: null
+  staticEdit: null,
+  hasApiPagination: true
 };
 
 export default Resource;

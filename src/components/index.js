@@ -13,7 +13,6 @@ export { default as ListWrapper } from './ListWrapper';
 export { default as ElemsRenderer } from './ElemsRenderer';
 export { default as LocalesTab } from './LocalesTab';
 export { default as CardRenderer } from './CardRenderer';
-export { default as Notification } from './Notification';
 export { default as AuthGuard } from './AuthGuard';
 export { default as ListRenderer } from './ListRenderer';
 export { default as Dropzone } from './Dropzone';

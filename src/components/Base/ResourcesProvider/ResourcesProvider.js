@@ -1,6 +1,7 @@
 import { AboutEdit } from '@/views/About';
 import { AgenciesList, AgencyCreate } from '@/views/Agencies';
 import { ContactEdit } from '@/views/Contact';
+import { MerchCreate, MerchList } from '@/views/Merch';
 import { OpenGraphEdit } from '@/views/OpenGraph';
 import { PageCreate, PagesList } from '@/views/Pages';
 import { SocialEdit } from '@/views/Social';
@@ -28,6 +29,14 @@ const resources = [
     list: StudiosList,
     create: StudioCreate,
     edit: StudioCreate
+  },
+  {
+    name: 'Merch',
+    resource: 'merches',
+    list: MerchList,
+    create: MerchCreate,
+    edit: MerchCreate,
+    hasApiPagination: false
   },
   {
     name: 'About',

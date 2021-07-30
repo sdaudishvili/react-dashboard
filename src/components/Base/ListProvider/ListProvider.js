@@ -10,24 +10,39 @@ import { deleteOne, getMany } from '@/api/dataProvider';
 import { generateErrorMsg } from '@/utils/messages/generateErrorMsg';
 
 const defaultQuery = {
-  q: '',
+  q: ''
+};
+
+const paginationDefaultQuery = {
   page: 0,
   perPage: 5
 };
 
 const ListProvider = (props) => {
-  const { resourceName, resource, component: Component, createRoute, editRoute } = props;
+  const { resourceName, resource, component: Component, createRoute, editRoute, hasApiPagination } = props;
   const { enqueueSnackbar } = useSnackbar();
 
-  const [options, setOptions] = React.useState({ ...defaultQuery });
+  const [queryOptions, setQueryOptions] = React.useState({
+    ...defaultQuery,
+    ...(hasApiPagination ? paginationDefaultQuery : {})
+  });
   const [records, setRecords] = React.useState({ data: [], total: 0 });
 
   React.useEffect(() => {
     const fetchData = async () => {
-      const query = { take: options.perPage, skip: options.page * options.perPage, q: options.q };
+      const { page, perPage, ...restQuery } = queryOptions;
+      const query = {
+        ...restQuery,
+        ...(hasApiPagination ? { take: perPage, skip: page * perPage } : {})
+      };
       try {
-        const { data = [], meta: { total = 0 } = {} } = await getMany(resource, { query });
-        setRecords({ data, total });
+        const res = await getMany(resource, { query });
+        if (hasApiPagination) {
+          const { data = [], meta: { total = 0 } = {} } = res;
+          setRecords({ data, total });
+        } else {
+          setRecords({ data: res, total: res.length });
+        }
       } catch (err) {
         if (err.errors) {
           err.errors.forEach((err) => enqueueSnackbar(generateErrorMsg(err), { variant: 'error' }));
@@ -37,7 +52,7 @@ const ListProvider = (props) => {
       }
     };
     fetchData();
-  }, [options]);
+  }, [queryOptions]);
 
   const deleteHandler = React.useCallback(async (id) => {
     try {
@@ -62,8 +77,8 @@ const ListProvider = (props) => {
       <Component
         {...records}
         editRoute={editRoute}
-        setOptions={setOptions}
-        options={options}
+        setQueryOptions={setQueryOptions}
+        queryOptions={queryOptions}
         onDeleteClick={deleteHandler}
       />
     </Page>
@@ -75,13 +90,15 @@ ListProvider.propTypes = {
   resource: PropTypes.string.isRequired,
   createRoute: PropTypes.string,
   editRoute: PropTypes.string,
-  component: PropTypes.any
+  component: PropTypes.any,
+  hasApiPagination: PropTypes.bool
 };
 
 ListProvider.defaultProps = {
   component: null,
   createRoute: null,
-  editRoute: null
+  editRoute: null,
+  hasApiPagination: true
 };
 
 export default ListProvider;

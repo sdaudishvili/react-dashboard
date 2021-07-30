@@ -5,20 +5,20 @@ import { studioTypes } from '../utils/types';
 
 const typeGetter = (key) => studioTypes.find((x) => x.key === key)?.title;
 
-const StudiosList = ({ data, total, options, setOptions, editRoute, onDeleteClick }) => {
-  const onPageChange = (page, perPage) => setOptions((opt) => ({ ...opt, page, perPage }));
-  const onSearch = (q) => setOptions((opt) => ({ ...opt, q }));
+const StudiosList = ({ data, total, queryOptions, setQueryOptions, editRoute, onDeleteClick }) => {
+  const onPageChange = (page, perPage) => setQueryOptions((opt) => ({ ...opt, page, perPage }));
+  const onSearch = (q) => setQueryOptions((opt) => ({ ...opt, q }));
 
   return (
     <>
       <SearchBar mt={3} onSearch={onSearch} />
       <ListWrapper
-        page={options.page}
+        page={queryOptions.page}
         mt={3}
         count={total}
         title="All Pages"
         onPageChange={onPageChange}
-        perPage={options.perPage}
+        perPage={queryOptions.perPage}
       >
         <ListRenderer
           items={data}
@@ -27,7 +27,6 @@ const StudiosList = ({ data, total, options, setOptions, editRoute, onDeleteClic
           displayKeys={[
             { prop: 'title', imageKey: 'image' },
             { prop: 'slug' },
-            { prop: 'shortDescription' },
             { prop: 'type', get: typeGetter },
             { prop: 'published' }
           ]}
@@ -40,8 +39,8 @@ const StudiosList = ({ data, total, options, setOptions, editRoute, onDeleteClic
 StudiosList.propTypes = {
   data: PropTypes.array,
   total: PropTypes.number,
-  options: PropTypes.object,
-  setOptions: PropTypes.func,
+  queryOptions: PropTypes.object,
+  setQueryOptions: PropTypes.func,
   editRoute: PropTypes.string,
   onDeleteClick: PropTypes.func
 };
@@ -49,8 +48,8 @@ StudiosList.propTypes = {
 StudiosList.defaultProps = {
   data: [],
   total: 0,
-  options: {},
-  setOptions: () => {},
+  queryOptions: {},
+  setQueryOptions: () => {},
   editRoute: '',
   onDeleteClick: () => {}
 };
