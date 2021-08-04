@@ -21,6 +21,7 @@ import CancelIcon from '@material-ui/icons/Cancel';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
 import { propertyKeyToLabel } from '@/utils/base';
+import { staticUrl } from '@/api/host';
 
 const recursivelyGet = (curLevelObjRef, path, level) => {
   if (!curLevelObjRef) return '';
@@ -110,7 +111,7 @@ const ListRenderer = (props) => {
                   displayKeys.map((x) => (
                     <TableCell className={x.imageKey && classes.imageCell} key={x.prop}>
                       {x.imageKey && (
-                        <Avatar className={classes.avatar} src={getValueByPath(item, x.imageKey)}>
+                        <Avatar className={classes.avatar} src={staticUrl + getValueByPath(item, x.imageKey)}>
                           {' '}
                         </Avatar>
                       )}
