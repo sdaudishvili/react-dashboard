@@ -77,18 +77,11 @@ const PageCreate = ({ saveHandler, initialValues }) => {
       value={values.image}
       onSelect={(value) => handleValueUpdate({ field: 'image', value })}
     />,
-    <CardRenderer title="Logo">
-      <ElemsRenderer
-        elems={[
-          <TextField {...generateTextFieldProps('logoTitle', { label: 'Title' })} />,
-          <ImageSelector
-            title="Source"
-            value={values.logo}
-            onSelect={(value) => handleValueUpdate({ field: 'logo', value })}
-          />
-        ]}
-      />
-    </CardRenderer>,
+    <ImageSelector
+      title="Logo source"
+      value={values.logo}
+      onSelect={(value) => handleValueUpdate({ field: 'logo', value })}
+    />,
 
     <MediaList items={values.mediaList} onListChange={(value) => handleValueUpdate({ field: 'mediaList', value })} />,
 
