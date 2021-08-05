@@ -27,7 +27,8 @@ const ContactEdit = ({ saveHandler, initialValues }) => {
   const aboutElems = [
     <TextField {...generateTextFieldProps('email')} />,
     <TextField {...generateTextFieldProps('phone')} />,
-    <TextField {...generateTextFieldProps('address')} />
+    <TextField {...generateTextFieldProps('address')} />,
+    <TextField {...generateTextFieldProps('address2')} />
   ];
 
   const cardElems = [
