@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { propertyKeyToLabel } from '@/utils/base';
 import { Button, Card, CardContent, CardHeader, TextField } from '@material-ui/core';
-import { Cropper, ElemsRenderer } from '@/components';
+import { CardRenderer, Cropper, Editor, ElemsRenderer } from '@/components';
 import PropTypes from 'prop-types';
 
 const AboutEdit = ({ saveHandler, initialValues }) => {
@@ -28,7 +28,12 @@ const AboutEdit = ({ saveHandler, initialValues }) => {
     <TextField {...generateTextFieldProps('title')} />,
     <TextField {...generateTextFieldProps('shortDescription')} />,
     <TextField {...generateTextFieldProps('contentTitle')} />,
-    <TextField {...generateTextFieldProps('description')} />,
+    <CardRenderer title="Description">
+      <Editor
+        initialValue={values.description}
+        onChange={(value) => handleValueUpdate({ field: 'description', value })}
+      />
+    </CardRenderer>,
     <TextField {...generateTextFieldProps('video')} />
   ];
 
