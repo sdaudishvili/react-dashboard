@@ -64,11 +64,12 @@ const MediaList = (props) => {
   };
 
   const popupSaveHandler = () => {
+    const list = items || [];
     if (currentItem.index !== null) {
       items[currentItem.index] = currentItem.details;
-      onListChange([...items]);
+      onListChange([...list]);
     } else {
-      onListChange([...items, currentItem.details]);
+      onListChange([...list, currentItem.details]);
     }
     setCurrentItem({ index: null, details: {} });
     setPopupOpened(false);
