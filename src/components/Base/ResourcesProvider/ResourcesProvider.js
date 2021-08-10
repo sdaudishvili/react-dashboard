@@ -2,7 +2,6 @@ import { AboutEdit } from '@/views/About';
 import { AgenciesList, AgencyCreate } from '@/views/Agencies';
 import { ContactEdit } from '@/views/Contact';
 import { MerchCreate, MerchList } from '@/views/Merch';
-import { OpenGraphEdit } from '@/views/OpenGraph';
 import { PageCreate, PagesList } from '@/views/Pages';
 import { SocialEdit } from '@/views/Social';
 import { StudioCreate, StudiosList } from '@/views/Studios';
@@ -52,12 +51,12 @@ const resources = [
     name: 'Social',
     resource: 'social',
     staticEdit: SocialEdit
-  },
-  {
-    name: 'Open Graph',
-    resource: 'opengraph',
-    staticEdit: OpenGraphEdit
   }
+  // {
+  //   name: 'Open Graph',
+  //   resource: 'opengraph',
+  //   staticEdit: OpenGraphEdit
+  // }
 ];
 
 const ResourcesProvider = () => {

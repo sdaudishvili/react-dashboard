@@ -4,7 +4,6 @@ import ContactsIcon from '@material-ui/icons/Contacts';
 import EditIcon from '@material-ui/icons/Edit';
 import MovieIcon from '@material-ui/icons/Movie';
 import BrandingWatermarkIcon from '@material-ui/icons/BrandingWatermark';
-import ShareIcon from '@material-ui/icons/Share';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import LoyaltyIcon from '@material-ui/icons/Loyalty';
 
@@ -12,11 +11,6 @@ export default [
   {
     title: 'Management',
     pages: [
-      {
-        title: 'Open Graph',
-        href: '/opengraph',
-        icon: ShareIcon
-      },
       {
         title: 'Contact',
         href: '/contact',
