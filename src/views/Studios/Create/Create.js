@@ -33,7 +33,7 @@ const StudioCreate = ({ saveHandler, initialValues }) => {
     fullWidth: true,
     label: label || propertyKeyToLabel(key),
     name: key,
-    value: values[key] || '',
+    value: values[key] || values[key] === 0 ? values[key] : '',
     variant: 'outlined'
   });
 
@@ -71,6 +71,11 @@ const StudioCreate = ({ saveHandler, initialValues }) => {
     <TextField
       {...generateTextFieldProps('innerTitle')}
       onChange={({ target: { value } }) => handleValueUpdate({ field: 'innerTitle', value })}
+    />,
+    <TextField
+      {...generateTextFieldProps('index')}
+      type="number"
+      onChange={({ target: { value } }) => handleValueUpdate({ field: 'index', value })}
     />
   ];
 
