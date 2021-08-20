@@ -21,7 +21,12 @@ const PagesList = ({ data, total, queryOptions, setQueryOptions, editRoute, onDe
           items={data}
           onDeleteClick={onDeleteClick}
           editRoute={editRoute}
-          displayKeys={[{ prop: 'title', imageKey: 'image' }, { prop: 'slug' }, { prop: 'published' }]}
+          displayKeys={[
+            { prop: 'title', imageKey: 'image' },
+            { prop: 'index' },
+            { prop: 'slug' },
+            { prop: 'published' }
+          ]}
         />
       </ListWrapper>
     </>

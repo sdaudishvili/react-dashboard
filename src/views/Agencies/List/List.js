@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ListRenderer, ListWrapper, SearchBar } from '@/components';
+import { DropDown, ListRenderer, ListWrapper, SearchBar } from '@/components';
+import { Box } from '@material-ui/core';
 import { agencyTypes } from '../utils/types';
 
 const typeGetter = (key) => agencyTypes.find((x) => x.key === key)?.title;
@@ -8,10 +9,21 @@ const typeGetter = (key) => agencyTypes.find((x) => x.key === key)?.title;
 const AgenciesList = ({ data, total, queryOptions, setQueryOptions, editRoute, onDeleteClick }) => {
   const onPageChange = (page, perPage) => setQueryOptions((opt) => ({ ...opt, page, perPage }));
   const onSearch = (q) => setQueryOptions((opt) => ({ ...opt, q }));
+  const onTypeChange = (type) => setQueryOptions((opt) => ({ ...opt, type }));
 
   return (
     <>
-      <SearchBar mt={3} onSearch={onSearch} />
+      <Box display="flex" mt={3}>
+        <SearchBar onSearch={onSearch} />
+        <DropDown
+          style={{ marginLeft: 20 }}
+          items={agencyTypes}
+          value={agencyTypes.find((x) => x.key === queryOptions.type)}
+          displayKey="title"
+          placeholder="Type"
+          onChange={(val) => onTypeChange(val ? val.key : '')}
+        />
+      </Box>
       <ListWrapper
         page={queryOptions.page}
         mt={3}
@@ -26,6 +38,7 @@ const AgenciesList = ({ data, total, queryOptions, setQueryOptions, editRoute, o
           editRoute={editRoute}
           displayKeys={[
             { prop: 'title', imageKey: 'image' },
+            { prop: 'index' },
             { prop: 'slug' },
             { prop: 'type', get: typeGetter },
             { prop: 'published' }

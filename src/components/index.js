@@ -21,5 +21,6 @@ export { default as Cropper } from './Cropper';
 export { default as Editor } from './Editor';
 export { default as ImageSelector } from './ImageSelector';
 export { default as MediaList } from './MediaList';
+export { default as DropDown } from './DropDown';
 
 export * from './CardComponents';
