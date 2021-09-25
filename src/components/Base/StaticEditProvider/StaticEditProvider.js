@@ -39,7 +39,7 @@ const EditProvider = (props) => {
       }
     };
     fetchData();
-  }, []);
+  }, [resource]);
 
   const saveHandler = async (values) => {
     try {

@@ -52,7 +52,7 @@ const ListProvider = (props) => {
       }
     };
     fetchData();
-  }, [queryOptions]);
+  }, [resource, queryOptions]);
 
   const deleteHandler = React.useCallback(async (id) => {
     try {
