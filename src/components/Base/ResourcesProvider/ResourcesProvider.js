@@ -3,6 +3,7 @@ import { AgenciesList, AgencyCreate } from '@/views/Agencies';
 import { ContactEdit } from '@/views/Contact';
 import { MerchCreate, MerchList } from '@/views/Merch';
 import { PageCreate, PagesList } from '@/views/Pages';
+import { ServiceCreate, ServicesList } from '@/views/Services';
 import { SocialEdit } from '@/views/Social';
 import { StudioCreate, StudiosList } from '@/views/Studios';
 import { Resource } from '..';
@@ -21,6 +22,13 @@ const resources = [
     list: AgenciesList,
     create: AgencyCreate,
     edit: AgencyCreate
+  },
+  {
+    name: 'Services',
+    resource: 'services',
+    list: ServicesList,
+    create: ServiceCreate,
+    edit: ServiceCreate
   },
   {
     name: 'Studios',

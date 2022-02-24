@@ -6,6 +6,7 @@ import MovieIcon from '@material-ui/icons/Movie';
 import BrandingWatermarkIcon from '@material-ui/icons/BrandingWatermark';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import LoyaltyIcon from '@material-ui/icons/Loyalty';
+import DnsIcon from '@material-ui/icons/Dns';
 
 export default [
   {
@@ -84,6 +85,21 @@ export default [
           {
             title: 'Create',
             href: '/merches/create'
+          }
+        ]
+      },
+      {
+        title: 'Services',
+        href: '/services',
+        icon: DnsIcon,
+        children: [
+          {
+            title: 'Browse Services',
+            href: '/services'
+          },
+          {
+            title: 'Create',
+            href: '/services/create'
           }
         ]
       },
